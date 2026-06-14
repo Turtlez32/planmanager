@@ -30,7 +30,6 @@
     }
     .container { max-width: 860px; margin: 0 auto; }
 
-    /* Header */
     .header { margin-bottom: 36px; }
     .header h1 { font-size: 28px; font-weight: 700; color: #fff; }
     .header .subtitle { color: var(--muted); margin-top: 6px; font-size: 15px; }
@@ -45,7 +44,6 @@
     }
     .meta-pill span { color: var(--text); font-weight: 600; }
 
-    /* Section */
     section { margin-bottom: 36px; }
     h2 {
       font-size: 16px;
@@ -58,22 +56,15 @@
       border-bottom: 1px solid var(--border);
     }
 
-    /* Stack table */
     table { width: 100%; border-collapse: collapse; }
     th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border); }
     th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
-    td:first-child { color: var(--blue); font-weight: 600; width: 140px; }
+    td:first-child { color: var(--blue); font-weight: 600; width: 160px; }
     td:nth-child(2) { font-family: 'Courier New', monospace; color: var(--green); width: 200px; }
     td:nth-child(3) { color: var(--muted); }
 
-    /* Phase blocks */
     .phase { margin-bottom: 28px; }
-    .phase-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
+    .phase-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
     .phase-num {
       background: var(--accent-dim);
       color: var(--accent);
@@ -92,7 +83,6 @@
       font-weight: 600;
     }
     .status-todo { background: #1e2235; color: var(--muted); }
-    .status-inprogress { background: #2a1f00; color: var(--yellow); }
     .status-done { background: #0d2318; color: var(--green); }
 
     .task-list { list-style: none; padding-left: 0; }
@@ -105,7 +95,7 @@
     }
     .task-list li:last-child { border-bottom: none; }
     .task-num {
-      min-width: 24px;
+      min-width: 28px;
       height: 24px;
       background: var(--surface);
       border: 1px solid var(--border);
@@ -118,6 +108,11 @@
       justify-content: center;
       flex-shrink: 0;
       margin-top: 1px;
+    }
+    .task-num.done {
+      background: #0d2318;
+      border-color: var(--green);
+      color: var(--green);
     }
     .task-body { flex: 1; }
     .task-label { color: var(--text); }
@@ -132,9 +127,8 @@
       color: var(--green);
     }
 
-    /* API reference */
-    .api-block { margin-bottom: 10px; }
-    .api-row {
+    .tool-block { margin-bottom: 14px; }
+    .tool-row {
       display: flex;
       align-items: baseline;
       gap: 10px;
@@ -144,28 +138,21 @@
       border-radius: 6px;
       margin-bottom: 6px;
     }
-    .method {
-      font-size: 11px;
+    .tool-name {
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
       font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 4px;
-      min-width: 44px;
-      text-align: center;
+      color: var(--accent);
+      min-width: 160px;
     }
-    .get { background: #0d2318; color: var(--green); }
-    .post { background: #1a2535; color: var(--blue); }
-    .put { background: #2a1f00; color: var(--yellow); }
-    .delete { background: #2a0d0d; color: var(--red); }
-    .api-path { font-family: 'Courier New', monospace; font-size: 13px; color: var(--text); }
-    .api-auth {
+    .tool-agent {
       margin-left: auto;
       font-size: 11px;
       color: var(--muted);
       font-style: italic;
     }
-    .api-desc { color: var(--muted); font-size: 12px; padding: 0 12px 8px 66px; }
+    .tool-desc { color: var(--muted); font-size: 12px; padding: 0 12px 8px 12px; }
 
-    /* DB schema */
     .schema-block {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -189,10 +176,9 @@
     }
     .schema-field:last-child { border-bottom: none; }
     .field-name { color: var(--green); font-family: 'Courier New', monospace; min-width: 160px; }
-    .field-type { color: var(--yellow); font-family: 'Courier New', monospace; min-width: 100px; }
+    .field-type { color: var(--yellow); font-family: 'Courier New', monospace; min-width: 120px; }
     .field-note { color: var(--muted); }
 
-    /* File tree */
     .file-tree {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -206,7 +192,6 @@
     .tree-file { color: var(--text); }
     .tree-comment { color: var(--muted); }
 
-    /* Notes */
     .note {
       background: var(--surface);
       border-left: 3px solid var(--accent);
@@ -217,13 +202,15 @@
       margin-bottom: 10px;
     }
     .note strong { color: var(--text); }
+    .note.green { border-left-color: var(--green); }
+    .note.yellow { border-left-color: var(--yellow); }
 
-    /* Agent instructions */
     .agent-box {
       background: #0d1a2a;
       border: 1px solid #1e3a5f;
       border-radius: 8px;
       padding: 16px 18px;
+      margin-bottom: 14px;
     }
     .agent-box h3 { color: var(--blue); font-size: 14px; margin-bottom: 10px; }
     .agent-box ol { padding-left: 18px; }
@@ -243,617 +230,465 @@
 <body>
 <div class="container">
 
-  <!-- ═══════════════════════════════════════ HEADER ═══════════════════════════════════════ -->
+  <!-- HEADER -->
   <div class="header">
     <h1>PlanManager</h1>
-    <div class="subtitle">Self-hosted AI plan hosting service — full build specification</div>
+    <div class="subtitle">MCP-native plan hosting service — full build specification</div>
     <div class="meta-row">
       <div class="meta-pill">Project <span>planmanager</span></div>
-      <div class="meta-pill">Created <span>2026-06-13</span></div>
+      <div class="meta-pill">Revised <span>2026-06-15</span></div>
       <div class="meta-pill">Status <span>Ready to build</span></div>
       <div class="meta-pill">Domain <span>plans.turtlez.au</span></div>
-      <div class="meta-pill">Infra <span>Docker · Hostinger VPS</span></div>
+      <div class="meta-pill">Infra <span>Vercel · GitLab</span></div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════ OVERVIEW ═══════════════════════════════════════ -->
+  <!-- OVERVIEW -->
   <section>
     <h2>Overview</h2>
     <p style="color:var(--muted); margin-bottom:10px;">
-      A self-hosted web service that stores, renders, and serves HTML plan documents generated by AI agents.
-      Agents can upload new plans, retrieve them by slug URL, and update them mid-project via a REST API secured with API keys.
-      The system has a single human admin (twadmin) who manages plans through a web dashboard protected by email/password login.
-      There is no public registration — the admin account is seeded from environment variables on first boot.
+      A Vercel-hosted MCP server that stores, retrieves, and serves HTML plan documents created by AI agents.
+      Claude and Codex connect to it via the Model Context Protocol and call tools to create, update, and list plans.
+      Each plan gets a public slug URL that any browser or agent can read with no auth.
+      No REST API. No dashboard. No VPS. No Docker.
     </p>
     <div class="note">
-      <strong>Primary use case:</strong> When an AI agent starts a new project it POSTs the HTML plan to this service
-      and receives back a public URL (<code>plans.turtlez.au/p/&lt;slug&gt;</code>). Other agents can fetch or update
-      that plan at any time using the same URL + API key — no copy-pasting between sessions.
+      <strong>How it works:</strong> An agent starts a project, calls <code>create_plan</code> with the HTML content,
+      and gets back a public URL (<code>plans.turtlez.au/p/&lt;slug&gt;</code>).
+      Any other agent or browser can fetch that URL at any time. Updates go through <code>update_plan</code>.
+      The owner manages plans by asking Claude — no web dashboard needed.
     </div>
-    <div class="note" style="margin-top:10px;">
-      <strong>Auth model:</strong> Reading a plan requires no credentials — the slug URL is the access token (8-char random, unguessable).
-      Writing or creating plans requires an API key (GUID) generated by the admin in the dashboard and given to each agent.
-      There is no <code>/auth/register</code> endpoint — the attack surface is intentionally minimal.
-    </div>
-    <div class="note" style="margin-top:10px;">
-      <strong>Agent accounts:</strong> Exactly two API keys are provisioned — one labelled <code>claude</code> and one labelled <code>codex</code>.
-      These are created by the admin on first setup and shared with each agent respectively. No other agents can POST to the API.
+    <div class="note green" style="margin-top:10px;">
+      <strong>Auth model:</strong> Each agent has a unique bearer token configured in their MCP client settings.
+      The server identifies the agent from the token (<code>claude</code> or <code>codex</code>) and records it on the plan.
+      No API key management UI. No JWT login. Tokens live in agent config only.
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ STACK ═══════════════════════════════════════ -->
+  <!-- TECH STACK -->
   <section>
     <h2>Tech Stack</h2>
     <table>
       <thead><tr><th>Layer</th><th>Technology</th><th>Reason</th></tr></thead>
       <tbody>
-        <tr><td>Backend API</td><td>Node.js + Fastify</td><td>Lightweight, fast, schema-first, easy Docker</td></tr>
-        <tr><td>API dev tooling</td><td>Vite (vite-node)</td><td>Fast TS dev server + build for Fastify — replaces tsx watch</td></tr>
-        <tr><td>Frontend</td><td>Vite + React 18</td><td>SPA served as static files — no SSR needed for an admin dashboard</td></tr>
-        <tr><td>Frontend routing</td><td>React Router v6</td><td>Client-side routing, ProtectedRoute wrapper replaces Next.js middleware</td></tr>
-        <tr><td>Styling</td><td>Tailwind CSS</td><td>Utility-first, works natively with Vite</td></tr>
-        <tr><td>Package manager</td><td>npm workspaces</td><td>Built-in monorepo support, no extra tooling</td></tr>
-        <tr><td>Database</td><td>SQLite via better-sqlite3</td><td>Zero-config, single file, sufficient for this scale</td></tr>
-        <tr><td>HTML Storage</td><td>Local Docker volume</td><td>Plans are flat files — keeps DB small, easy backup</td></tr>
-        <tr><td>Auth (human)</td><td>JWT + bcrypt + httpOnly cookie</td><td>Cookie set by Fastify, sent automatically by browser via same-domain nginx proxy</td></tr>
-        <tr><td>Auth (agent)</td><td>API key (SHA-256 hashed)</td><td>Simple Bearer token, shown once on creation</td></tr>
-        <tr><td>Search</td><td>SQLite FTS5</td><td>Full-text search on title, description, tags — built in</td></tr>
-        <tr><td>Source control</td><td>GitLab (SSH)</td><td>Private repo, deploy key on VPS for git pull</td></tr>
-        <tr><td>Reverse proxy</td><td>nginx</td><td>SSL termination, SPA static file serving, API proxy</td></tr>
-        <tr><td>SSL</td><td>Let's Encrypt / Certbot</td><td>Free, auto-renewing</td></tr>
-        <tr><td>Containerisation</td><td>docker compose v2</td><td>Two services: api + nginx (nginx also serves Vite build output)</td></tr>
+        <tr><td>MCP server</td><td>@modelcontextprotocol/sdk</td><td>Official MCP TypeScript SDK — handles protocol, tools, transport</td></tr>
+        <tr><td>Runtime</td><td>Vercel Functions (Node.js)</td><td>Serverless, auto-scales, zero infrastructure to manage</td></tr>
+        <tr><td>Language</td><td>TypeScript (strict)</td><td>Type safety throughout, no any types</td></tr>
+        <tr><td>Database</td><td>Vercel Postgres (Neon)</td><td>Managed Postgres, free tier sufficient, auto-connected by Vercel</td></tr>
+        <tr><td>File storage</td><td>Vercel Blob</td><td>Persistent HTML file storage, direct public URLs, free tier</td></tr>
+        <tr><td>Deploy</td><td>Vercel + GitLab</td><td>Push to main → auto-deploy. Domain already configured on Vercel.</td></tr>
+        <tr><td>Source control</td><td>GitLab (turtlewareau/planmanager)</td><td>Already set up — git@gitlab.com:turtlewareau/planmanager.git</td></tr>
+        <tr><td>Package manager</td><td>npm</td><td>Standard, no extra tooling</td></tr>
+        <tr><td>SSL</td><td>Vercel (automatic)</td><td>Free, zero-config, already active on plans.turtlez.au</td></tr>
       </tbody>
     </table>
   </section>
 
-  <!-- ═══════════════════════════════════════ FILE STRUCTURE ═══════════════════════════════════════ -->
+  <!-- FILE STRUCTURE -->
   <section>
     <h2>Project File Structure</h2>
     <div class="file-tree">
       <span class="tree-dir">planmanager/</span><br>
-      &nbsp;&nbsp;<span class="tree-dir">apps/</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-dir">api/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># Fastify backend</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">src/</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">routes/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># auth.ts · plans.ts · apikeys.ts · health.ts</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">services/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># PlanService · AuthService · StorageService</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">db/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># schema.ts · migrate.ts</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">middleware/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># jwtAuth.ts · apiKeyAuth.ts</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">plugins/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># cors.ts · rateLimit.ts</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">app.ts</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">server.ts</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">vite.config.ts</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># vite-node dev server + build config</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">tsconfig.json</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">Dockerfile</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">package.json</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-dir">web/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># Vite + React SPA</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">src/</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">pages/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># Login · Dashboard · Upload · PlanDetail · ApiKeys</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">components/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># ProtectedRoute · shared UI</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">lib/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># api.ts (fetch wrapper) · auth.ts</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">App.tsx</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">main.tsx</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">index.html</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">vite.config.ts</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">tailwind.config.ts</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">postcss.config.ts</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">tsconfig.json</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">Dockerfile</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># multi-stage: npm build → nginx:alpine static serve</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">package.json</span><br>
-      &nbsp;&nbsp;<span class="tree-dir">data/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># Docker volume mount</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-dir">plans/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># &lt;slug&gt;.html files live here</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">planmanager.db</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># SQLite DB file</span><br>
+      &nbsp;&nbsp;<span class="tree-dir">api/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># Vercel Functions (auto-routed)</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">mcp.ts</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># POST /api/mcp — MCP server entry point</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-dir">p/</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">[slug].ts</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># GET /p/:slug — public plan viewer (rewritten via vercel.json)</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">health.ts</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># GET /api/health — uptime check</span><br>
+      &nbsp;&nbsp;<span class="tree-dir">lib/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># Shared code (not Vercel routes)</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">db.ts</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># Vercel Postgres client + query helpers</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">blob.ts</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># Vercel Blob put/get/delete helpers</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">plans.ts</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># PlanService — CRUD logic used by MCP tools</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">auth.ts</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># Token → agent name resolution</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">slug.ts</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># 8-char random slug generator</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">mcp-server.ts</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># MCP Server instance + tool registrations</span><br>
       &nbsp;&nbsp;<span class="tree-dir">scripts/</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">update.sh</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># git pull → docker compose up --build</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">backup.sh</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># tar the plandata volume to /backups</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">seed.ts</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># one-time admin password hash generator</span><br>
-      &nbsp;&nbsp;<span class="tree-file">docker-compose.yml</span><br>
-      &nbsp;&nbsp;<span class="tree-file">nginx.conf</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">migrate.ts</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># Run once: creates plans table in Vercel Postgres</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-file">gen-tokens.ts</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># Run once: prints two random MCP tokens</span><br>
+      &nbsp;&nbsp;<span class="tree-file">vercel.json</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># Routing rewrites (/p/:slug → /api/p/[slug])</span><br>
+      &nbsp;&nbsp;<span class="tree-file">package.json</span><br>
+      &nbsp;&nbsp;<span class="tree-file">tsconfig.json</span><br>
       &nbsp;&nbsp;<span class="tree-file">.env.example</span><br>
       &nbsp;&nbsp;<span class="tree-file">.gitignore</span><br>
+      &nbsp;&nbsp;<span class="tree-file">plan.html</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tree-comment"># This document</span><br>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ DATABASE SCHEMA ═══════════════════════════════════════ -->
+  <!-- DATABASE SCHEMA -->
   <section>
     <h2>Database Schema</h2>
-
-    <div class="schema-block">
-      <h3>users</h3>
-      <div class="schema-field"><span class="field-name">id</span><span class="field-type">INTEGER PK</span><span class="field-note">auto-increment</span></div>
-      <div class="schema-field"><span class="field-name">email</span><span class="field-type">TEXT UNIQUE</span><span class="field-note">login email, not nullable</span></div>
-      <div class="schema-field"><span class="field-name">password_hash</span><span class="field-type">TEXT</span><span class="field-note">bcrypt, cost 12</span></div>
-      <div class="schema-field"><span class="field-name">created_at</span><span class="field-type">DATETIME</span><span class="field-note">DEFAULT CURRENT_TIMESTAMP</span></div>
-    </div>
+    <p style="color:var(--muted); font-size:13px; margin-bottom:12px;">
+      One table. No users. No API keys. Agent identity comes from the MCP token at request time.
+    </p>
 
     <div class="schema-block">
       <h3>plans</h3>
-      <div class="schema-field"><span class="field-name">id</span><span class="field-type">INTEGER PK</span><span class="field-note">auto-increment</span></div>
-      <div class="schema-field"><span class="field-name">slug</span><span class="field-type">TEXT UNIQUE</span><span class="field-note">8-char random alphanumeric, used in URL</span></div>
-      <div class="schema-field"><span class="field-name">title</span><span class="field-type">TEXT</span><span class="field-note">human-readable plan title</span></div>
-      <div class="schema-field"><span class="field-name">description</span><span class="field-type">TEXT</span><span class="field-note">short summary shown in list view</span></div>
-      <div class="schema-field"><span class="field-name">tags</span><span class="field-type">TEXT</span><span class="field-note">comma-separated, e.g. "react,auth,api"</span></div>
-      <div class="schema-field"><span class="field-name">html_path</span><span class="field-type">TEXT</span><span class="field-note">absolute path on disk: /data/plans/&lt;slug&gt;.html</span></div>
-      <div class="schema-field"><span class="field-name">owner_id</span><span class="field-type">INTEGER FK</span><span class="field-note">references users(id)</span></div>
-      <div class="schema-field"><span class="field-name">created_at</span><span class="field-type">DATETIME</span><span class="field-note">DEFAULT CURRENT_TIMESTAMP</span></div>
-      <div class="schema-field"><span class="field-name">updated_at</span><span class="field-type">DATETIME</span><span class="field-note">updated on every HTML write</span></div>
+      <div class="schema-field">
+        <span class="field-name">id</span>
+        <span class="field-type">SERIAL PK</span>
+        <span class="field-note">auto-increment</span>
+      </div>
+      <div class="schema-field">
+        <span class="field-name">slug</span>
+        <span class="field-type">TEXT UNIQUE</span>
+        <span class="field-note">8-char random alphanumeric — used in public URL</span>
+      </div>
+      <div class="schema-field">
+        <span class="field-name">title</span>
+        <span class="field-type">TEXT NOT NULL</span>
+        <span class="field-note">human-readable plan title</span>
+      </div>
+      <div class="schema-field">
+        <span class="field-name">description</span>
+        <span class="field-type">TEXT</span>
+        <span class="field-note">short summary</span>
+      </div>
+      <div class="schema-field">
+        <span class="field-name">tags</span>
+        <span class="field-type">TEXT</span>
+        <span class="field-note">comma-separated, e.g. "react,auth,api"</span>
+      </div>
+      <div class="schema-field">
+        <span class="field-name">blob_url</span>
+        <span class="field-type">TEXT NOT NULL</span>
+        <span class="field-note">Vercel Blob URL where the HTML file lives</span>
+      </div>
+      <div class="schema-field">
+        <span class="field-name">created_by</span>
+        <span class="field-type">TEXT NOT NULL</span>
+        <span class="field-note">'claude' or 'codex' — resolved from MCP token at write time</span>
+      </div>
+      <div class="schema-field">
+        <span class="field-name">created_at</span>
+        <span class="field-type">TIMESTAMPTZ</span>
+        <span class="field-note">DEFAULT NOW()</span>
+      </div>
+      <div class="schema-field">
+        <span class="field-name">updated_at</span>
+        <span class="field-type">TIMESTAMPTZ</span>
+        <span class="field-note">set manually on every update</span>
+      </div>
     </div>
 
-    <div class="schema-block">
-      <h3>api_keys</h3>
-      <div class="schema-field"><span class="field-name">id</span><span class="field-type">INTEGER PK</span><span class="field-note">auto-increment</span></div>
-      <div class="schema-field"><span class="field-name">user_id</span><span class="field-type">INTEGER FK</span><span class="field-note">references users(id)</span></div>
-      <div class="schema-field"><span class="field-name">label</span><span class="field-type">TEXT</span><span class="field-note">friendly name, e.g. "claude-agent-1"</span></div>
-      <div class="schema-field"><span class="field-name">key_hash</span><span class="field-type">TEXT</span><span class="field-note">SHA-256 of the raw key — raw shown once only</span></div>
-      <div class="schema-field"><span class="field-name">last_used_at</span><span class="field-type">DATETIME</span><span class="field-note">updated on each successful request</span></div>
-      <div class="schema-field"><span class="field-name">created_at</span><span class="field-type">DATETIME</span><span class="field-note">DEFAULT CURRENT_TIMESTAMP</span></div>
-    </div>
-
-    <div class="schema-block">
-      <h3>plans_fts (FTS5 virtual table)</h3>
-      <div class="schema-field"><span class="field-name">plan_id</span><span class="field-type">INTEGER</span><span class="field-note">references plans(id)</span></div>
-      <div class="schema-field"><span class="field-name">title</span><span class="field-type">TEXT</span><span class="field-note">mirrored from plans</span></div>
-      <div class="schema-field"><span class="field-name">description</span><span class="field-type">TEXT</span><span class="field-note">mirrored from plans</span></div>
-      <div class="schema-field"><span class="field-name">tags</span><span class="field-type">TEXT</span><span class="field-note">mirrored from plans</span></div>
+    <div class="note">
+      <strong>Search:</strong> For a personal tool at this scale, <code>ILIKE '%term%'</code> on title, description, and tags is sufficient.
+      No FTS extension needed.
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ API REFERENCE ═══════════════════════════════════════ -->
+  <!-- MCP TOOLS -->
   <section>
-    <h2>API Reference</h2>
-
+    <h2>MCP Tools Reference</h2>
     <p style="color:var(--muted); margin-bottom:14px; font-size:13px;">
-      <strong style="color:var(--text)">Auth schemes:</strong>
-      Browser routes use <code>Authorization: Bearer &lt;jwt&gt;</code> (obtained from login).
-      Agent routes use <code>Authorization: Bearer &lt;api-key&gt;</code>.
-      Public routes require no auth.
+      All tools require a valid <code>Authorization: Bearer &lt;token&gt;</code> header.
+      The token resolves to an agent name (<code>claude</code> or <code>codex</code>) which is recorded on write operations.
     </p>
 
-    <div class="schema-block" style="margin-bottom:18px;">
-      <h3 style="color:var(--accent); font-family:'Segoe UI',system-ui,sans-serif; font-size:13px; margin-bottom:10px;">CORS Policy (@fastify/cors)</h3>
-      <div class="schema-field"><span class="field-name">origin</span><span class="field-type" style="min-width:180px;">allowlist</span><span class="field-note"><code>https://plans.turtlez.au</code> + <code>http://localhost:3000</code> (dev only via NODE_ENV check)</span></div>
-      <div class="schema-field"><span class="field-name">methods</span><span class="field-type" style="min-width:180px;">explicit list</span><span class="field-note">GET · POST · PUT · DELETE · OPTIONS</span></div>
-      <div class="schema-field"><span class="field-name">allowedHeaders</span><span class="field-type" style="min-width:180px;">explicit list</span><span class="field-note">Authorization · Content-Type</span></div>
-      <div class="schema-field"><span class="field-name">credentials</span><span class="field-type" style="min-width:180px;">true</span><span class="field-note">Required for httpOnly JWT cookie on browser requests</span></div>
-      <div class="schema-field"><span class="field-name">maxAge</span><span class="field-type" style="min-width:180px;">86400</span><span class="field-note">Preflight cached for 24 h — reduces OPTIONS round-trips</span></div>
-      <div class="schema-field"><span class="field-name">wildcard</span><span class="field-type" style="min-width:180px;">false</span><span class="field-note">Never use <code>*</code> — explicit origin list only</span></div>
+    <div class="tool-block">
+      <div class="tool-row">
+        <span class="tool-name">create_plan</span>
+        <span class="tool-agent">claude · codex</span>
+      </div>
+      <div class="tool-desc">
+        Creates a new plan. Stores HTML in Vercel Blob, saves metadata to Postgres.<br>
+        <strong>Input:</strong> <code>{ title: string, description: string, tags: string, html: string }</code><br>
+        <strong>Returns:</strong> <code>{ slug, url: "https://plans.turtlez.au/p/&lt;slug&gt;", created_by }</code>
+      </div>
     </div>
 
-    <!-- Auth -->
-    <div class="api-block">
-      <strong style="color:var(--muted); font-size:12px; display:block; margin-bottom:6px;">AUTH</strong>
-      <div class="api-row"><span class="method post">POST</span><span class="api-path">/auth/login</span><span class="api-auth">public</span></div>
-      <div class="api-desc">Body: <code>{ email, password }</code> → returns JWT. Only the seeded admin account can log in. No registration endpoint exists.</div>
+    <div class="tool-block">
+      <div class="tool-row">
+        <span class="tool-name">update_plan</span>
+        <span class="tool-agent">claude · codex</span>
+      </div>
+      <div class="tool-desc">
+        Replaces the HTML for an existing plan. Optionally updates description and tags. Sets updated_at.<br>
+        <strong>Input:</strong> <code>{ slug: string, html: string, description?: string, tags?: string }</code><br>
+        <strong>Returns:</strong> <code>{ slug, url, updated_at }</code>
+      </div>
     </div>
 
-    <!-- API Keys -->
-    <div class="api-block">
-      <strong style="color:var(--muted); font-size:12px; display:block; margin-bottom:6px;">API KEY MANAGEMENT (JWT required)</strong>
-      <div class="api-row"><span class="method get">GET</span><span class="api-path">/api-keys</span><span class="api-auth">jwt</span></div>
-      <div class="api-desc">List all API keys for the authenticated user (hashes hidden)</div>
-      <div class="api-row"><span class="method post">POST</span><span class="api-path">/api-keys</span><span class="api-auth">jwt</span></div>
-      <div class="api-desc">Body: <code>{ label }</code> → generates key, returns raw key once</div>
-      <div class="api-row"><span class="method delete">DELETE</span><span class="api-path">/api-keys/:id</span><span class="api-auth">jwt</span></div>
-      <div class="api-desc">Revoke a key by ID</div>
+    <div class="tool-block">
+      <div class="tool-row">
+        <span class="tool-name">get_plan</span>
+        <span class="tool-agent">claude · codex</span>
+      </div>
+      <div class="tool-desc">
+        Fetches plan metadata. HTML is available at the public URL — agents should fetch it directly from there.<br>
+        <strong>Input:</strong> <code>{ slug: string }</code><br>
+        <strong>Returns:</strong> <code>{ slug, title, description, tags, url, created_by, created_at, updated_at }</code>
+      </div>
     </div>
 
-    <!-- Plans (browser) -->
-    <div class="api-block">
-      <strong style="color:var(--muted); font-size:12px; display:block; margin-bottom:6px;">PLANS — BROWSER (JWT required)</strong>
-      <div class="api-row"><span class="method get">GET</span><span class="api-path">/plans</span><span class="api-auth">jwt</span></div>
-      <div class="api-desc">List plans. Query params: <code>?q=search+term</code> · <code>?tag=react</code> · <code>?limit=20&amp;offset=0</code></div>
-      <div class="api-row"><span class="method post">POST</span><span class="api-path">/plans</span><span class="api-auth">jwt</span></div>
-      <div class="api-desc">Multipart: <code>title, description, tags, html</code> (file or raw string) → returns plan with slug</div>
-      <div class="api-row"><span class="method get">GET</span><span class="api-path">/plans/:slug</span><span class="api-auth">jwt</span></div>
-      <div class="api-desc">Returns plan metadata + HTML content</div>
-      <div class="api-row"><span class="method put">PUT</span><span class="api-path">/plans/:slug</span><span class="api-auth">jwt</span></div>
-      <div class="api-desc">Body: <code>{ title?, description?, tags?, html? }</code> — partial update supported</div>
-      <div class="api-row"><span class="method delete">DELETE</span><span class="api-path">/plans/:slug</span><span class="api-auth">jwt</span></div>
-      <div class="api-desc">Deletes metadata row and HTML file from disk</div>
+    <div class="tool-block">
+      <div class="tool-row">
+        <span class="tool-name">list_plans</span>
+        <span class="tool-agent">claude · codex</span>
+      </div>
+      <div class="tool-desc">
+        Lists all plans, newest first. Optional search filter across title, description, and tags.<br>
+        <strong>Input:</strong> <code>{ search?: string, tag?: string, limit?: number }</code><br>
+        <strong>Returns:</strong> <code>[ { slug, title, description, tags, url, created_by, updated_at } ]</code>
+      </div>
     </div>
 
-    <!-- Plans (agent) -->
-    <div class="api-block">
-      <strong style="color:var(--muted); font-size:12px; display:block; margin-bottom:6px;">PLANS — AGENT API (API key required)</strong>
-      <div class="api-row"><span class="method get">GET</span><span class="api-path">/api/plans</span><span class="api-auth">api-key</span></div>
-      <div class="api-desc">List all plans. Returns <code>[ { slug, title, description, tags, updated_at, url } ]</code></div>
-      <div class="api-row"><span class="method get">GET</span><span class="api-path">/api/plans/:slug</span><span class="api-auth">api-key</span></div>
-      <div class="api-desc">Returns full plan: metadata + <code>html</code> field with file contents</div>
-      <div class="api-row"><span class="method post">POST</span><span class="api-path">/api/plans</span><span class="api-auth">api-key</span></div>
-      <div class="api-desc">Body: <code>{ title, description, tags, html }</code> → creates plan, returns slug + public URL</div>
-      <div class="api-row"><span class="method put">PUT</span><span class="api-path">/api/plans/:slug</span><span class="api-auth">api-key</span></div>
-      <div class="api-desc">Replace or patch HTML for an existing plan. Body: <code>{ html, description?, tags? }</code></div>
-    </div>
-
-    <!-- Public -->
-    <div class="api-block">
-      <strong style="color:var(--muted); font-size:12px; display:block; margin-bottom:6px;">PUBLIC</strong>
-      <div class="api-row"><span class="method get">GET</span><span class="api-path">/p/:slug</span><span class="api-auth">public</span></div>
-      <div class="api-desc">Serves the raw HTML plan file — linkable from any browser or agent</div>
+    <div class="tool-block">
+      <div class="tool-row">
+        <span class="tool-name">delete_plan</span>
+        <span class="tool-agent">claude · codex</span>
+      </div>
+      <div class="tool-desc">
+        Deletes the Blob file and removes the Postgres row.<br>
+        <strong>Input:</strong> <code>{ slug: string }</code><br>
+        <strong>Returns:</strong> <code>{ deleted: true, slug }</code>
+      </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ NGINX CONFIG ═══════════════════════════════════════ -->
+  <!-- AUTH MODEL -->
   <section>
-    <h2>nginx Configuration</h2>
-    <p style="color:var(--muted); margin-bottom:12px; font-size:13px;">
-      nginx terminates SSL and routes by path prefix. API traffic (<code>/p/</code>, <code>/api/</code>, <code>/auth/</code>, <code>/plans</code>, <code>/api-keys</code>) goes to the Fastify container.
-      Everything else goes to Next.js.
-    </p>
+    <h2>Auth Model</h2>
+    <div class="schema-block">
+      <h3 style="font-family:'Segoe UI',system-ui,sans-serif; color:var(--accent);">Token Resolution</h3>
+      <div class="schema-field">
+        <span class="field-name">MCP_TOKEN_CLAUDE</span>
+        <span class="field-type">env var</span>
+        <span class="field-note">32-byte hex token → resolves to agent name "claude"</span>
+      </div>
+      <div class="schema-field">
+        <span class="field-name">MCP_TOKEN_CODEX</span>
+        <span class="field-type">env var</span>
+        <span class="field-note">32-byte hex token → resolves to agent name "codex"</span>
+      </div>
+    </div>
+    <div class="note">
+      <strong>How it works:</strong> The MCP request arrives with <code>Authorization: Bearer &lt;token&gt;</code>.
+      <code>lib/auth.ts</code> compares the token against the two env vars using a timing-safe comparison
+      (<code>crypto.timingSafeEqual</code>) and returns the agent name or throws a 401.
+      No database lookup needed — two env var comparisons is the entire auth layer.
+    </div>
+    <div class="note yellow" style="margin-top:10px;">
+      <strong>Token generation:</strong> Run <code>node scripts/gen-tokens.ts</code> once to print two random tokens.
+      Add them to Vercel environment variables. Configure each token in the respective agent's MCP settings.
+      Tokens are never committed to git.
+    </div>
+  </section>
+
+  <!-- PUBLIC VIEWER -->
+  <section>
+    <h2>Public Plan Viewer</h2>
+    <div class="schema-block">
+      <h3 style="font-family:'Segoe UI',system-ui,sans-serif; color:var(--green);">GET /p/:slug</h3>
+      <div class="schema-field">
+        <span class="field-name">Auth</span>
+        <span class="field-type">none</span>
+        <span class="field-note">fully public — the slug is the access token</span>
+      </div>
+      <div class="schema-field">
+        <span class="field-name">Handler</span>
+        <span class="field-type">api/p/[slug].ts</span>
+        <span class="field-note">looks up blob_url from Postgres, fetches from Blob, streams HTML to browser</span>
+      </div>
+      <div class="schema-field">
+        <span class="field-name">Content-Type</span>
+        <span class="field-type">text/html</span>
+        <span class="field-note">served directly — renders in browser as-is</span>
+      </div>
+      <div class="schema-field">
+        <span class="field-name">Routing</span>
+        <span class="field-type">vercel.json rewrite</span>
+        <span class="field-note"><code>/p/:slug</code> → <code>/api/p/[slug]</code></span>
+      </div>
+    </div>
+    <div class="note">
+      <strong>Agent reading:</strong> Agents do not need MCP to read a plan. They simply fetch
+      <code>https://plans.turtlez.au/p/&lt;slug&gt;</code> via HTTP — the HTML is returned directly.
+      No token required. This is the shareable link.
+    </div>
+  </section>
+
+  <!-- VERCEL CONFIG -->
+  <section>
+    <h2>vercel.json</h2>
     <div class="file-tree" style="line-height:1.7;">
-      <span class="tree-comment"># nginx.conf</span><br>
-      <br>
-      upstream planmanager_api {<br>
-      &nbsp;&nbsp;server api:3001;<br>
-      &nbsp;&nbsp;keepalive 32;<br>
-      }<br>
-      <br>
-      upstream planmanager_web {<br>
-      &nbsp;&nbsp;server web:3000;<br>
-      &nbsp;&nbsp;keepalive 32;<br>
-      }<br>
-      <br>
-      <span class="tree-comment"># Redirect all HTTP → HTTPS</span><br>
-      server {<br>
-      &nbsp;&nbsp;listen 80;<br>
-      &nbsp;&nbsp;server_name plans.turtlez.au;<br>
-      &nbsp;&nbsp;return 301 https://$host$request_uri;<br>
-      }<br>
-      <br>
-      server {<br>
-      &nbsp;&nbsp;listen 443 ssl http2;<br>
-      &nbsp;&nbsp;server_name plans.turtlez.au;<br>
-      <br>
-      &nbsp;&nbsp;ssl_certificate     /etc/letsencrypt/live/plans.turtlez.au/fullchain.pem;<br>
-      &nbsp;&nbsp;ssl_certificate_key /etc/letsencrypt/live/plans.turtlez.au/privkey.pem;<br>
-      &nbsp;&nbsp;include             /etc/letsencrypt/options-ssl-nginx.conf;<br>
-      &nbsp;&nbsp;ssl_dhparam         /etc/letsencrypt/ssl-dhparams.pem;<br>
-      <br>
-      &nbsp;&nbsp;<span class="tree-comment"># Security headers</span><br>
-      &nbsp;&nbsp;add_header X-Frame-Options SAMEORIGIN;<br>
-      &nbsp;&nbsp;add_header X-Content-Type-Options nosniff;<br>
-      &nbsp;&nbsp;add_header Referrer-Policy strict-origin-when-cross-origin;<br>
-      &nbsp;&nbsp;add_header Strict-Transport-Security "max-age=63072000; includeSubDomains" always;<br>
-      <br>
-      &nbsp;&nbsp;client_max_body_size 10M; <span class="tree-comment"># allow large HTML plan uploads</span><br>
-      <br>
-      &nbsp;&nbsp;<span class="tree-comment"># Public plan viewer → API</span><br>
-      &nbsp;&nbsp;location /p/ {<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_pass         http://planmanager_api;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_http_version 1.1;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   Host              $host;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   X-Real-IP         $remote_addr;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   X-Forwarded-Proto $scheme;<br>
-      &nbsp;&nbsp;}<br>
-      <br>
-      &nbsp;&nbsp;<span class="tree-comment"># Agent API → API</span><br>
-      &nbsp;&nbsp;location /api/ {<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_pass         http://planmanager_api;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_http_version 1.1;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   Host              $host;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   X-Real-IP         $remote_addr;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   X-Forwarded-Proto $scheme;<br>
-      &nbsp;&nbsp;}<br>
-      <br>
-      &nbsp;&nbsp;<span class="tree-comment"># Login → API</span><br>
-      &nbsp;&nbsp;location /auth/ {<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_pass         http://planmanager_api;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_http_version 1.1;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   Host              $host;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   X-Real-IP         $remote_addr;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   X-Forwarded-Proto $scheme;<br>
-      &nbsp;&nbsp;}<br>
-      <br>
-      &nbsp;&nbsp;<span class="tree-comment"># Dashboard plans API → API</span><br>
-      &nbsp;&nbsp;location /plans {<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_pass         http://planmanager_api;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_http_version 1.1;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   Host              $host;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   X-Real-IP         $remote_addr;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   X-Forwarded-Proto $scheme;<br>
-      &nbsp;&nbsp;}<br>
-      <br>
-      &nbsp;&nbsp;<span class="tree-comment"># API key management → API</span><br>
-      &nbsp;&nbsp;location /api-keys {<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_pass         http://planmanager_api;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_http_version 1.1;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   Host              $host;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   X-Real-IP         $remote_addr;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   X-Forwarded-Proto $scheme;<br>
-      &nbsp;&nbsp;}<br>
-      <br>
-      &nbsp;&nbsp;<span class="tree-comment"># Everything else → Next.js frontend</span><br>
-      &nbsp;&nbsp;location / {<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_pass         http://planmanager_web;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_http_version 1.1;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   Upgrade           $http_upgrade;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   Connection        "upgrade";<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   Host              $host;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   X-Real-IP         $remote_addr;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header   X-Forwarded-Proto $scheme;<br>
-      &nbsp;&nbsp;}<br>
+      {<br>
+      &nbsp;&nbsp;"rewrites": [<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;{ "source": "/p/:slug", "destination": "/api/p/[slug]" }<br>
+      &nbsp;&nbsp;]<br>
       }
     </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════ DOCKER COMPOSE ═══════════════════════════════════════ -->
-  <section>
-    <h2>docker-compose.yml</h2>
-    <p style="color:var(--muted); margin-bottom:12px; font-size:13px;">Two services: <code>api</code> (Fastify) and <code>nginx</code> (SSL + static web + API proxy). The web SPA is baked into the nginx image at build time.</p>
-    <div class="file-tree" style="line-height:1.7;">
-      <span class="tree-comment"># docker-compose.yml</span><br>
-      services:<br>
-      &nbsp;&nbsp;api:<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;build:<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context: ./apps/api<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;env_file: .env<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;environment:<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- NODE_ENV=production<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;volumes:<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- plandata:/data<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;expose:<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "3001"<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;healthcheck:<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;test: ["CMD", "wget", "-qO-", "http://localhost:3001/health"]<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interval: 30s<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;timeout: 10s<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;retries: 3<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;restart: unless-stopped<br>
-      <br>
-      &nbsp;&nbsp;nginx:<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;build:<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context: .<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dockerfile: Dockerfile.nginx <span class="tree-comment"># multi-stage: builds web SPA then copies into nginx</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args:<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VITE_API_URL: https://plans.turtlez.au<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;ports:<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "80:80"<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "443:443"<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;volumes:<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- /etc/letsencrypt:/etc/letsencrypt:ro<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;depends_on:<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;api:<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;condition: service_healthy<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;restart: unless-stopped<br>
-      <br>
-      volumes:<br>
-      &nbsp;&nbsp;plandata:
-    </div>
-    <div class="note" style="margin-top:12px;">
-      <strong>Dockerfile.nginx</strong> — multi-stage: Stage 1 builds <code>apps/web</code> with Vite, Stage 2 is <code>nginx:alpine</code> that COPYs the <code>dist/</code> output and the <code>nginx.conf</code>. The web SPA is shipped inside the nginx image — no separate web container needed.
+    <div class="note" style="margin-top:10px;">
+      All other routing is handled automatically by Vercel's <code>api/</code> directory convention.
+      <code>/api/mcp</code> → <code>api/mcp.ts</code>, <code>/api/health</code> → <code>api/health.ts</code>.
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ LOCAL DEV ═══════════════════════════════════════ -->
-  <section>
-    <h2>Local Development Workflow</h2>
-    <p style="color:var(--muted); margin-bottom:12px; font-size:13px;">Run both apps directly with hot reload — no Docker needed for day-to-day development.</p>
-    <div class="file-tree" style="line-height:1.7;">
-      <span class="tree-comment"># Install all workspaces from repo root</span><br>
-      npm install<br>
-      <br>
-      <span class="tree-comment"># Terminal 1 — Fastify API (vite-node, hot reload, port 3001)</span><br>
-      cd apps/api &amp;&amp; npm run dev<br>
-      <br>
-      <span class="tree-comment"># Terminal 2 — Vite + React SPA (HMR, port 5173)</span><br>
-      cd apps/web &amp;&amp; npm run dev<br>
-      <br>
-      <span class="tree-comment"># apps/web/.env.local — used only in local dev</span><br>
-      VITE_API_URL=http://localhost:3001
-    </div>
-    <div class="note" style="margin-top:12px;">
-      <strong>CORS in dev:</strong> The Vite dev server runs on <code>http://localhost:5173</code>. The Fastify CORS allowlist already includes <code>http://localhost:3000</code> — update it to include <code>http://localhost:5173</code> for local dev, guarded by <code>NODE_ENV !== 'production'</code>.
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════ BUILD PHASES ═══════════════════════════════════════ -->
+  <!-- BUILD PHASES -->
   <section>
     <h2>Build Phases</h2>
 
     <div class="phase">
       <div class="phase-header">
         <span class="phase-num">Phase 0</span>
-        <span class="phase-title">Prerequisites — GitLab &amp; SSH</span>
-        <span class="phase-status status-todo">TODO</span>
+        <span class="phase-title">Project Foundation — GitLab + Vercel</span>
+        <span class="phase-status status-done">PARTIAL</span>
       </div>
       <ul class="task-list">
-        <li><span class="task-num">0.1</span><div class="task-body"><div class="task-label">Create private GitLab repository named <code>planmanager</code></div><div class="task-detail">gitlab.com → New project → Create blank project. Set visibility to Private. Do not initialise with a README — you'll push from local.</div></div></li>
-        <li><span class="task-num">0.2</span><div class="task-body"><div class="task-label">Create the local repo and push initial commit</div><div class="task-detail"><code>git init → git remote add origin git@gitlab.com:&lt;username&gt;/planmanager.git → git push -u origin main</code>. Add a root <code>.gitignore</code> first (see task 0.3).</div></div></li>
-        <li><span class="task-num">0.3</span><div class="task-body"><div class="task-label">Create <code>.gitignore</code> at repo root</div><div class="task-detail">Exclude: <code>.env</code> · <code>node_modules/</code> · <code>dist/</code> · <code>.next/</code> · <code>data/</code> · <code>*.db</code> · <code>.DS_Store</code> · <code>*.local</code></div></div></li>
-        <li><span class="task-num">0.4</span><div class="task-body"><div class="task-label">Generate SSH deploy key on the VPS</div><div class="task-detail"><code>ssh-keygen -t ed25519 -C "planmanager-vps-deploy" -f ~/.ssh/planmanager_deploy -N ""</code>. This creates a key pair — the private key stays on the VPS, the public key goes to GitLab.</div></div></li>
-        <li><span class="task-num">0.5</span><div class="task-body"><div class="task-label">Add the deploy public key to GitLab</div><div class="task-detail">GitLab repo → Settings → Repository → Deploy Keys → Add new key. Paste contents of <code>~/.ssh/planmanager_deploy.pub</code>. Read-only access is sufficient (for <code>git pull</code> only).</div></div></li>
-        <li><span class="task-num">0.6</span><div class="task-body"><div class="task-label">Configure SSH on the VPS to use the deploy key for GitLab</div><div class="task-detail">Add to <code>~/.ssh/config</code>: <code>Host gitlab.com / IdentityFile ~/.ssh/planmanager_deploy</code>. Test: <code>ssh -T git@gitlab.com</code> — should greet by username.</div></div></li>
-        <li><span class="task-num">0.7</span><div class="task-body"><div class="task-label">Clone the repo on the VPS</div><div class="task-detail"><code>git clone git@gitlab.com:&lt;username&gt;/planmanager.git /opt/planmanager</code>. All future deploys use <code>bash scripts/update.sh</code> from this directory.</div></div></li>
+        <li><span class="task-num done">✓</span><div class="task-body"><div class="task-label">Create private GitLab repo <code>turtlewareau/planmanager</code></div><div class="task-detail">Done — git@gitlab.com:turtlewareau/planmanager.git</div></div></li>
+        <li><span class="task-num done">✓</span><div class="task-body"><div class="task-label">Initialise local repo, add <code>.gitignore</code>, push to GitLab</div><div class="task-detail">Done — main branch tracking origin/main</div></div></li>
+        <li><span class="task-num">0.3</span><div class="task-body"><div class="task-label">Connect Vercel project to GitLab repo</div><div class="task-detail">Vercel dashboard → Add New Project → Import from GitLab → select <code>turtlewareau/planmanager</code>. Framework preset: Other. Root directory: <code>.</code></div></div></li>
+        <li><span class="task-num">0.4</span><div class="task-body"><div class="task-label">Assign domain <code>plans.turtlez.au</code> to the Vercel project</div><div class="task-detail">Vercel project → Settings → Domains → add <code>plans.turtlez.au</code>. Update DNS if needed (should already point to Vercel).</div></div></li>
+        <li><span class="task-num">0.5</span><div class="task-body"><div class="task-label">Create Vercel Postgres database</div><div class="task-detail">Vercel dashboard → Storage → Create → Postgres (Neon). Name it <code>planmanager-db</code>. Connect to the project — Vercel auto-adds <code>POSTGRES_URL</code> and related env vars.</div></div></li>
+        <li><span class="task-num">0.6</span><div class="task-body"><div class="task-label">Enable Vercel Blob storage</div><div class="task-detail">Vercel dashboard → Storage → Create → Blob. Name it <code>planmanager-blob</code>. Connect to the project — Vercel auto-adds <code>BLOB_READ_WRITE_TOKEN</code>.</div></div></li>
+        <li><span class="task-num">0.7</span><div class="task-body"><div class="task-label">Generate MCP tokens and add to Vercel env vars</div><div class="task-detail">Run <code>node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"</code> twice. Add to Vercel project env vars as <code>MCP_TOKEN_CLAUDE</code> and <code>MCP_TOKEN_CODEX</code>. Also add <code>BASE_URL=https://plans.turtlez.au</code>. Never commit tokens to git.</div></div></li>
       </ul>
     </div>
 
     <div class="phase">
       <div class="phase-header">
         <span class="phase-num">Phase 1</span>
-        <span class="phase-title">Backend Scaffold + Database</span>
+        <span class="phase-title">Project Scaffold</span>
         <span class="phase-status status-todo">TODO</span>
       </div>
       <ul class="task-list">
-        <li><span class="task-num">1</span><div class="task-body"><div class="task-label">Initialise monorepo with <code>npm workspaces</code></div><div class="task-detail">Root <code>package.json</code> with <code>"workspaces": ["apps/*"]</code>. Run <code>npm install</code> from root to hoist shared deps. No separate workspace yaml needed.</div></div></li>
-        <li><span class="task-num">2</span><div class="task-body"><div class="task-label">Scaffold Fastify app in <code>apps/api</code></div><div class="task-detail">TypeScript strict mode, Vite (vite-node) for dev server + build, @fastify/cors, @fastify/multipart, @fastify/jwt, @fastify/rate-limit. CORS: explicit origin allowlist <code>https://plans.turtlez.au</code> + <code>http://localhost:5173</code> (dev only, NODE_ENV check). Methods: GET/POST/PUT/DELETE/OPTIONS. credentials: true. maxAge: 86400. Never wildcard.</div></div></li>
-        <li><span class="task-num">3</span><div class="task-body"><div class="task-label">Write SQLite schema migration in <code>apps/api/src/db/schema.ts</code></div><div class="task-detail">Create tables: users, plans, api_keys, plans_fts (FTS5)</div></div></li>
-        <li><span class="task-num">4</span><div class="task-body"><div class="task-label">Write <code>migrate.ts</code> that runs on startup</div><div class="task-detail">Idempotent — uses IF NOT EXISTS, safe to run every boot</div></div></li>
-        <li><span class="task-num">5</span><div class="task-body"><div class="task-label">Create <code>.env.example</code> with all required vars</div><div class="task-detail">JWT_SECRET, DATA_DIR, PORT, NODE_ENV, ADMIN_EMAIL, ADMIN_PASSWORD_HASH, JWT_EXPIRY, NEXT_PUBLIC_API_URL</div></div></li>
-        <li><span class="task-num">5b</span><div class="task-body"><div class="task-label">Write one-time <code>seed.ts</code> script to generate admin password hash</div><div class="task-detail">Accepts a plaintext password, outputs bcrypt hash (cost 12) to stdout. Run once: <code>npx tsx seed.ts</code> — paste result into .env as ADMIN_PASSWORD_HASH</div></div></li>
+        <li><span class="task-num">1</span><div class="task-body"><div class="task-label">Initialise <code>package.json</code> with TypeScript + dependencies</div><div class="task-detail">Dependencies: <code>@modelcontextprotocol/sdk @vercel/postgres @vercel/blob</code>. Dev deps: <code>typescript @types/node tsx</code>. Scripts: <code>"migrate": "tsx scripts/migrate.ts"</code>, <code>"gen-tokens": "tsx scripts/gen-tokens.ts"</code>.</div></div></li>
+        <li><span class="task-num">2</span><div class="task-body"><div class="task-label">Configure <code>tsconfig.json</code></div><div class="task-detail">Strict mode. Target ESNext. Module NodeNext. <code>moduleResolution: NodeNext</code>. Include <code>api/**/*</code>, <code>lib/**/*</code>, <code>scripts/**/*</code>.</div></div></li>
+        <li><span class="task-num">3</span><div class="task-body"><div class="task-label">Write <code>vercel.json</code></div><div class="task-detail">Single rewrite: <code>/p/:slug</code> → <code>/api/p/[slug]</code>. That's it.</div></div></li>
+        <li><span class="task-num">4</span><div class="task-body"><div class="task-label">Write <code>.env.example</code></div><div class="task-detail"><code>MCP_TOKEN_CLAUDE</code>, <code>MCP_TOKEN_CODEX</code>, <code>BASE_URL</code>, <code>POSTGRES_URL</code>, <code>BLOB_READ_WRITE_TOKEN</code>. The Postgres and Blob vars are auto-populated by Vercel — include them for local dev reference.</div></div></li>
       </ul>
     </div>
 
     <div class="phase">
       <div class="phase-header">
         <span class="phase-num">Phase 2</span>
-        <span class="phase-title">Auth Routes + Middleware</span>
+        <span class="phase-title">Database + Storage Layer</span>
         <span class="phase-status status-todo">TODO</span>
       </div>
       <ul class="task-list">
-        <li><span class="task-num">6</span><div class="task-body"><div class="task-label">Implement <code>AuthService</code>: login + API key gen/verify</div><div class="task-detail">bcrypt cost 12 for password comparison; SHA-256 for API keys stored in DB. No register method — user exists from seed only.</div></div></li>
-        <li><span class="task-num">7</span><div class="task-body"><div class="task-label">Seed admin user in <code>migrate.ts</code> on first boot</div><div class="task-detail">On startup: if users table is empty, INSERT admin from ADMIN_EMAIL + ADMIN_PASSWORD_HASH env vars. Idempotent — skipped if user already exists.</div></div></li>
-        <li><span class="task-num">8</span><div class="task-body"><div class="task-label">Add <code>/auth/login</code> route only — no register route</div><div class="task-detail">Return signed JWT (7-day expiry). 401 on bad credentials. No other auth endpoints.</div></div></li>
-        <li><span class="task-num">9</span><div class="task-body"><div class="task-label">Add <code>/api-keys</code> CRUD routes</div><div class="task-detail">POST generates crypto.randomBytes(32).toString('hex'), stores SHA-256 hash, returns raw key once. On first setup, admin creates exactly two keys labelled <code>claude</code> and <code>codex</code> — these are the only agents permitted to write via the API.</div></div></li>
-        <li><span class="task-num">10</span><div class="task-body"><div class="task-label">Write <code>jwtAuth</code> and <code>apiKeyAuth</code> Fastify preHandler hooks</div><div class="task-detail">Both attach <code>req.user</code> — routes don't care which auth method was used. apiKeyAuth hashes incoming Bearer token with SHA-256 before DB lookup.</div></div></li>
-        <li><span class="task-num">10b</span><div class="task-body"><div class="task-label">Add rate limiting to <code>POST /auth/login</code></div><div class="task-detail">Use <code>@fastify/rate-limit</code>: max 5 requests per minute per IP on the login route only. Returns 429 with <code>Retry-After</code> header. Prevents brute-force on the single admin account.</div></div></li>
-        <li><span class="task-num">10c</span><div class="task-body"><div class="task-label">Add <code>GET /health</code> endpoint</div><div class="task-detail">Returns <code>{ status: "ok", uptime: process.uptime() }</code> with 200. No auth. Used by Docker healthcheck and nginx upstream monitoring.</div></div></li>
+        <li><span class="task-num">5</span><div class="task-body"><div class="task-label">Write <code>scripts/migrate.ts</code></div><div class="task-detail">Creates the <code>plans</code> table using <code>@vercel/postgres</code>. Idempotent — uses <code>CREATE TABLE IF NOT EXISTS</code>. Run once: <code>npm run migrate</code> (requires local <code>.env</code> with Vercel Postgres URL).</div></div></li>
+        <li><span class="task-num">6</span><div class="task-body"><div class="task-label">Write <code>scripts/gen-tokens.ts</code></div><div class="task-detail">Prints two <code>crypto.randomBytes(32).toString('hex')</code> tokens labelled CLAUDE and CODEX. Run once before first deploy.</div></div></li>
+        <li><span class="task-num">7</span><div class="task-body"><div class="task-label">Write <code>lib/slug.ts</code></div><div class="task-detail">Exports <code>generateSlug()</code> — returns 8-char random alphanumeric string using <code>crypto.randomBytes</code>. No external deps.</div></div></li>
+        <li><span class="task-num">8</span><div class="task-body"><div class="task-label">Write <code>lib/auth.ts</code></div><div class="task-detail">Exports <code>resolveAgent(authHeader: string): string</code>. Extracts Bearer token, uses <code>crypto.timingSafeEqual</code> to compare against <code>MCP_TOKEN_CLAUDE</code> and <code>MCP_TOKEN_CODEX</code>. Returns <code>'claude'</code> or <code>'codex'</code> or throws 401 error.</div></div></li>
+        <li><span class="task-num">9</span><div class="task-body"><div class="task-label">Write <code>lib/db.ts</code></div><div class="task-detail">Thin wrapper around <code>@vercel/postgres</code>. Exports typed query helpers: <code>insertPlan</code>, <code>getPlanBySlug</code>, <code>updatePlan</code>, <code>listPlans</code>, <code>deletePlan</code>.</div></div></li>
+        <li><span class="task-num">10</span><div class="task-body"><div class="task-label">Write <code>lib/blob.ts</code></div><div class="task-detail">Wraps <code>@vercel/blob</code>. Exports <code>uploadPlanHtml(slug, html)</code> → returns blob URL. Exports <code>deletePlanBlob(blobUrl)</code>. Uses <code>put()</code> with <code>access: 'public'</code> and <code>contentType: 'text/html'</code>.</div></div></li>
+        <li><span class="task-num">11</span><div class="task-body"><div class="task-label">Write <code>lib/plans.ts</code></div><div class="task-detail">PlanService combining DB + Blob. Exports: <code>createPlan(input, agent)</code>, <code>updatePlan(slug, input)</code>, <code>getPlan(slug)</code>, <code>listPlans(filters)</code>, <code>deletePlan(slug)</code>. All public URL generation uses <code>BASE_URL</code> env var.</div></div></li>
       </ul>
     </div>
 
     <div class="phase">
       <div class="phase-header">
         <span class="phase-num">Phase 3</span>
-        <span class="phase-title">Plan CRUD + HTML Storage</span>
+        <span class="phase-title">MCP Server</span>
         <span class="phase-status status-todo">TODO</span>
       </div>
       <ul class="task-list">
-        <li><span class="task-num">11</span><div class="task-body"><div class="task-label">Implement <code>StorageService</code> for HTML file I/O</div><div class="task-detail">Reads/writes to DATA_DIR/plans/&lt;slug&gt;.html. Creates directory if missing on startup.</div></div></li>
-        <li><span class="task-num">12</span><div class="task-body"><div class="task-label">Implement <code>PlanService</code> — all CRUD + FTS sync</div><div class="task-detail">On create/update: write file, upsert FTS row, set updated_at manually. On delete: delete file + FTS row.</div></div></li>
-        <li><span class="task-num">13</span><div class="task-body"><div class="task-label">Register JWT-guarded plan routes (<code>/plans/*</code>)</div><div class="task-detail">Includes search via FTS5 MATCH query when <code>?q=</code> param present</div></div></li>
-        <li><span class="task-num">14</span><div class="task-body"><div class="task-label">Register API-key-guarded agent routes (<code>/api/plans/*</code>)</div><div class="task-detail">Same underlying PlanService — different auth middleware only</div></div></li>
-        <li><span class="task-num">15</span><div class="task-body"><div class="task-label">Add public <code>GET /p/:slug</code> route</div><div class="task-detail">Serves HTML file directly with <code>Content-Type: text/html</code>. No auth required — the slug is the access token.</div></div></li>
+        <li><span class="task-num">12</span><div class="task-body"><div class="task-label">Write <code>lib/mcp-server.ts</code> — server instance + tool registrations</div><div class="task-detail">Create <code>new Server({ name: 'planmanager', version: '1.0.0' })</code>. Register all 5 tools with input schemas using <code>server.tool()</code>. Import PlanService for each handler. Export the server instance.</div></div></li>
+        <li><span class="task-num">13</span><div class="task-body"><div class="task-label">Register <code>create_plan</code> tool</div><div class="task-detail">Schema: <code>title (string, required)</code>, <code>description (string)</code>, <code>tags (string)</code>, <code>html (string, required)</code>. Handler calls <code>PlanService.createPlan()</code>, returns slug + full public URL.</div></div></li>
+        <li><span class="task-num">14</span><div class="task-body"><div class="task-label">Register <code>update_plan</code> tool</div><div class="task-detail">Schema: <code>slug (string, required)</code>, <code>html (string, required)</code>, <code>description? (string)</code>, <code>tags? (string)</code>. Returns updated slug + URL + updated_at.</div></div></li>
+        <li><span class="task-num">15</span><div class="task-body"><div class="task-label">Register <code>get_plan</code>, <code>list_plans</code>, <code>delete_plan</code> tools</div><div class="task-detail">get_plan: slug → metadata. list_plans: optional search/tag/limit → array. delete_plan: slug → confirmation. All delegate to PlanService.</div></div></li>
+        <li><span class="task-num">16</span><div class="task-body"><div class="task-label">Write <code>api/mcp.ts</code> — Vercel Function entry point</div><div class="task-detail">Import the server from <code>lib/mcp-server.ts</code>. On each request: call <code>resolveAgent(req.headers.authorization)</code> — throw 401 if invalid. Create <code>StreamableHTTPServerTransport</code>, connect server, handle request. Export as default Vercel handler.</div></div></li>
       </ul>
     </div>
 
     <div class="phase">
       <div class="phase-header">
         <span class="phase-num">Phase 4</span>
-        <span class="phase-title">Vite + React Frontend</span>
+        <span class="phase-title">Public Viewer + Health Check</span>
         <span class="phase-status status-todo">TODO</span>
       </div>
       <ul class="task-list">
-        <li><span class="task-num">16</span><div class="task-body"><div class="task-label">Scaffold Vite + React app in <code>apps/web</code></div><div class="task-detail"><code>npm create vite@latest web -- --template react-ts</code>. Add Tailwind CSS: <code>npm install -D tailwindcss postcss autoprefixer && npx tailwindcss init -p</code>. Add React Router: <code>npm install react-router-dom</code>.</div></div></li>
-        <li><span class="task-num">17</span><div class="task-body"><div class="task-label">Set up React Router v6 in <code>App.tsx</code></div><div class="task-detail">Routes: <code>/login</code> · <code>/dashboard</code> · <code>/dashboard/upload</code> · <code>/dashboard/plans/:slug</code> · <code>/dashboard/api-keys</code>. Wrap protected routes with a <code>&lt;ProtectedRoute&gt;</code> component that checks for valid JWT and redirects to /login if absent.</div></div></li>
-        <li><span class="task-num">18</span><div class="task-body"><div class="task-label">Write <code>lib/api.ts</code> fetch wrapper</div><div class="task-detail">Base URL from <code>import.meta.env.VITE_API_URL</code>. Attaches <code>Authorization: Bearer &lt;token&gt;</code> from localStorage. Handles 401 by clearing token and redirecting to /login.</div></div></li>
-        <li><span class="task-num">19</span><div class="task-body"><div class="task-label">Build login page <code>/login</code></div><div class="task-detail">POST to /auth/login, store returned JWT in localStorage, redirect to /dashboard. Show error on 401.</div></div></li>
-        <li><span class="task-num">20</span><div class="task-body"><div class="task-label">Build dashboard page <code>/dashboard</code></div><div class="task-detail">Plan list with title, tags, last-updated. Search bar hits <code>GET /plans?q=</code>. Paginated with limit/offset.</div></div></li>
-        <li><span class="task-num">21</span><div class="task-body"><div class="task-label">Build upload page <code>/dashboard/upload</code></div><div class="task-detail">Fields: title, description, tags. HTML input: file upload OR paste textarea. POST to /plans.</div></div></li>
-        <li><span class="task-num">22</span><div class="task-body"><div class="task-label">Build plan detail page <code>/dashboard/plans/:slug</code></div><div class="task-detail">Metadata display. iframe pointing to /p/:slug for live preview. Edit button opens inline textarea for HTML replacement via PUT /plans/:slug.</div></div></li>
-        <li><span class="task-num">23</span><div class="task-body"><div class="task-label">Build API keys page <code>/dashboard/api-keys</code></div><div class="task-detail">Table of keys (label, last used, created). Generate button (POST /api-keys). Revoke button (DELETE /api-keys/:id). Show raw key once in a copy-to-clipboard modal. Labels: <code>claude</code> and <code>codex</code>.</div></div></li>
+        <li><span class="task-num">17</span><div class="task-body"><div class="task-label">Write <code>api/p/[slug].ts</code> — public plan viewer</div><div class="task-detail">GET only. No auth. Look up <code>blob_url</code> from Postgres by slug. Fetch HTML from Vercel Blob. Return with <code>Content-Type: text/html</code>. 404 if slug not found.</div></div></li>
+        <li><span class="task-num">18</span><div class="task-body"><div class="task-label">Write <code>api/health.ts</code></div><div class="task-detail">Returns <code>{ status: "ok", timestamp: new Date().toISOString() }</code> with 200. No auth. Used to confirm the deployment is live.</div></div></li>
       </ul>
     </div>
 
     <div class="phase">
       <div class="phase-header">
         <span class="phase-num">Phase 5</span>
-        <span class="phase-title">Docker + nginx</span>
+        <span class="phase-title">Deploy + Agent Configuration</span>
         <span class="phase-status status-todo">TODO</span>
       </div>
       <ul class="task-list">
-        <li><span class="task-num">23</span><div class="task-body"><div class="task-label">Write <code>apps/api/Dockerfile</code></div><div class="task-detail">Multi-stage: build → production. NODE_ENV=production, non-root user, EXPOSE 3001</div></div></li>
-        <li><span class="task-num">24</span><div class="task-body"><div class="task-label">Write <code>Dockerfile.nginx</code> — multi-stage SPA + nginx</div><div class="task-detail">Stage 1 (<code>node:20-alpine</code>): <code>npm ci → npm run build</code> in apps/web. Accepts <code>ARG VITE_API_URL</code> baked at build time. Stage 2 (<code>nginx:alpine</code>): COPY dist/ to <code>/usr/share/nginx/html</code>, COPY nginx.conf. Add SPA fallback: <code>try_files $uri /index.html</code> so React Router handles unknown paths.</div></div></li>
-        <li><span class="task-num">25</span><div class="task-body"><div class="task-label">Write <code>apps/api/Dockerfile</code></div><div class="task-detail">Multi-stage: build (<code>node:20-alpine</code>, <code>npm ci → vite build</code>) → production (<code>node:20-alpine</code>, non-root user, EXPOSE 3001). Pin Node 20.</div></div></li>
-        <li><span class="task-num">26</span><div class="task-body"><div class="task-label">Write <code>docker-compose.yml</code></div><div class="task-detail">Two services: <code>api</code> (env_file, plandata volume, healthcheck) + <code>nginx</code> (builds from Dockerfile.nginx, ports 80/443, letsencrypt volume, depends_on api healthy). See docker-compose.yml section above.</div></div></li>
-        <li><span class="task-num">26b</span><div class="task-body"><div class="task-label">Write <code>nginx.conf</code> with SPA fallback</div><div class="task-detail">Static files served from <code>/usr/share/nginx/html</code>. SPA fallback: <code>try_files $uri /index.html</code> under the root location. API proxy blocks for /p/, /api/, /auth/, /plans, /api-keys as documented in the nginx section above. HTTP→HTTPS redirect. Security headers + HSTS.</div></div></li>
-        <li><span class="task-num">27</span><div class="task-body"><div class="task-label">Write <code>scripts/update.sh</code> and <code>scripts/backup.sh</code></div><div class="task-detail">
-          <strong>update.sh:</strong> <code>set -euo pipefail → cd repo root → git pull --ff-only → docker compose up --build -d → docker image prune -f</code>. Use <code>docker compose</code> (v2), not <code>docker-compose</code>.<br>
-          <strong>backup.sh:</strong> <code>docker run --rm -v planmanager_plandata:/data -v /backups/planmanager:/backup alpine tar czf /backup/plandata-$(date +%Y%m%d-%H%M%S).tar.gz /data → find /backups/planmanager -name "*.tar.gz" -mtime +30 -delete</code>. Schedule via crontab: <code>0 3 * * * bash /opt/planmanager/scripts/backup.sh</code>.
-        </div></div></li>
-        <li><span class="task-num">28</span><div class="task-body"><div class="task-label">Test full stack locally with <code>docker-compose up --build</code></div><div class="task-detail">Verify: login → upload plan → view at /p/:slug → update via API key curl → run update.sh and confirm it completes cleanly</div></div></li>
-      </ul>
-    </div>
-
-    <div class="phase">
-      <div class="phase-header">
-        <span class="phase-num">Phase 6</span>
-        <span class="phase-title">VPS Deploy</span>
-        <span class="phase-status status-todo">TODO</span>
-      </div>
-      <ul class="task-list">
-        <li><span class="task-num">29</span><div class="task-body"><div class="task-label">Point DNS A record for <code>plans.turtlez.au</code> → VPS IP</div><div class="task-detail">Do this first — Let's Encrypt needs DNS propagated before cert issuance</div></div></li>
-        <li><span class="task-num">30</span><div class="task-body"><div class="task-label">SSH into Hostinger VPS, install Docker + Compose</div><div class="task-detail"><code>curl -fsSL https://get.docker.com | sh</code> then add user to docker group</div></div></li>
-        <li><span class="task-num">31</span><div class="task-body"><div class="task-label">Clone repo, copy <code>.env</code>, run <code>docker-compose up -d</code></div><div class="task-detail">Set a strong JWT_SECRET (openssl rand -hex 32), set DATA_DIR=/data</div></div></li>
-        <li><span class="task-num">32</span><div class="task-body"><div class="task-label">Run Certbot to obtain SSL cert for plans.turtlez.au</div><div class="task-detail"><code>certbot --nginx -d plans.turtlez.au</code> — auto-renews via systemd timer</div></div></li>
-        <li><span class="task-num">33</span><div class="task-body"><div class="task-label">Create the two agent API keys and smoke test</div><div class="task-detail">Log in to dashboard. Generate key labelled <code>claude</code> — copy and store securely. Generate key labelled <code>codex</code> — copy and store securely. Use curl to POST a plan via the claude key, verify it appears in dashboard and is accessible at /p/:slug with no auth. Test update.sh deploys cleanly.</div></div></li>
+        <li><span class="task-num">19</span><div class="task-body"><div class="task-label">Run database migration</div><div class="task-detail">Pull Vercel env vars locally: <code>vercel env pull .env.local</code>. Then: <code>npm run migrate</code>. Verify the <code>plans</code> table exists in the Neon dashboard.</div></div></li>
+        <li><span class="task-num">20</span><div class="task-body"><div class="task-label">Push to GitLab and verify Vercel auto-deploy</div><div class="task-detail"><code>git push origin main</code>. Watch Vercel dashboard for build. Confirm deployment succeeds. Check <code>https://plans.turtlez.au/api/health</code> returns 200.</div></div></li>
+        <li><span class="task-num">21</span><div class="task-body"><div class="task-label">Configure Claude Code MCP settings</div><div class="task-detail">Add to <code>~/.claude/settings.json</code> under <code>mcpServers</code>: <code>{ "planmanager": { "type": "http", "url": "https://plans.turtlez.au/api/mcp", "headers": { "Authorization": "Bearer &lt;MCP_TOKEN_CLAUDE&gt;" } } }</code>. Verify tools appear in Claude Code.</div></div></li>
+        <li><span class="task-num">22</span><div class="task-body"><div class="task-label">Configure Codex MCP settings</div><div class="task-detail">Add the MCP server URL + Codex token to Codex's tool/MCP configuration. Exact steps depend on how Codex is being run (CLI config, system prompt, or platform settings).</div></div></li>
+        <li><span class="task-num">23</span><div class="task-body"><div class="task-label">End-to-end smoke test</div><div class="task-detail">Ask Claude to call <code>create_plan</code> with a test plan. Verify the returned URL resolves in a browser. Ask Claude to call <code>list_plans</code> and confirm the plan appears. Ask Claude to call <code>delete_plan</code> to clean up. Repeat with Codex token.</div></div></li>
       </ul>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ ENV VARS ═══════════════════════════════════════ -->
+  <!-- ENV VARS -->
   <section>
     <h2>Environment Variables</h2>
     <table>
-      <thead><tr><th>Variable</th><th>Example</th><th>Notes</th></tr></thead>
+      <thead><tr><th>Variable</th><th>Source</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td>JWT_SECRET</td><td><code>openssl rand -hex 32</code></td><td>Keep secret, rotate manually</td></tr>
-        <tr><td>ADMIN_EMAIL</td><td><code>you@example.com</code></td><td>Seeded admin login email</td></tr>
-        <tr><td>ADMIN_PASSWORD_HASH</td><td><code>npx tsx seed.ts</code></td><td>bcrypt hash (cost 12) — run seed.ts once to generate</td></tr>
-        <tr><td>DATA_DIR</td><td><code>/data</code></td><td>Root of the Docker volume</td></tr>
-        <tr><td>PORT</td><td><code>3001</code></td><td>Fastify listen port</td></tr>
-        <tr><td>NODE_ENV</td><td><code>production</code></td><td>Disables verbose error payloads</td></tr>
-        <tr><td>JWT_EXPIRY</td><td><code>7d</code></td><td>Browser session expiry</td></tr>
-        <tr><td>LOG_LEVEL</td><td><code>info</code></td><td>Fastify/pino log level — logs to stdout, captured by Docker</td></tr>
-        <tr><td>VITE_API_URL</td><td><code>https://plans.turtlez.au</code></td><td>Baked into the Vite SPA at Docker build time via ARG — not a runtime secret</td></tr>
+        <tr><td>MCP_TOKEN_CLAUDE</td><td>Manual — gen-tokens.ts</td><td>32-byte hex. Bearer token for Claude agent. Never commit.</td></tr>
+        <tr><td>MCP_TOKEN_CODEX</td><td>Manual — gen-tokens.ts</td><td>32-byte hex. Bearer token for Codex agent. Never commit.</td></tr>
+        <tr><td>BASE_URL</td><td>Manual</td><td><code>https://plans.turtlez.au</code> — used to build public plan URLs</td></tr>
+        <tr><td>POSTGRES_URL</td><td>Auto — Vercel Postgres</td><td>Pooled connection string. Auto-added when DB is connected to project.</td></tr>
+        <tr><td>POSTGRES_URL_NON_POOLING</td><td>Auto — Vercel Postgres</td><td>Used for migrations. Also auto-added.</td></tr>
+        <tr><td>BLOB_READ_WRITE_TOKEN</td><td>Auto — Vercel Blob</td><td>Auto-added when Blob store is connected to project.</td></tr>
       </tbody>
     </table>
   </section>
 
-  <!-- ═══════════════════════════════════════ AGENT INSTRUCTIONS ═══════════════════════════════════════ -->
+  <!-- AGENT CONFIGURATION -->
   <section>
-    <h2>Instructions for Remote Agent</h2>
+    <h2>Agent MCP Configuration</h2>
+
     <div class="agent-box">
-      <h3>How to start building this project</h3>
+      <h3>Claude Code — ~/.claude/settings.json</h3>
+      <div class="file-tree" style="background:transparent; border:none; padding:0; font-size:12px; line-height:1.8;">
+        {<br>
+        &nbsp;&nbsp;"mcpServers": {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;"planmanager": {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "http",<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"url": "https://plans.turtlez.au/api/mcp",<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"headers": {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Authorization": "Bearer &lt;MCP_TOKEN_CLAUDE value&gt;"<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;}<br>
+        }
+      </div>
+    </div>
+
+    <div class="agent-box">
+      <h3>Codex — MCP tool configuration</h3>
+      <div class="file-tree" style="background:transparent; border:none; padding:0; font-size:12px; line-height:1.8;">
+        <span class="tree-comment"># Exact config depends on Codex setup (CLI / platform / system prompt)</span><br>
+        <span class="tree-comment"># The MCP server details to provide:</span><br>
+        Server URL: https://plans.turtlez.au/api/mcp<br>
+        Transport: Streamable HTTP<br>
+        Auth header: Authorization: Bearer &lt;MCP_TOKEN_CODEX value&gt;
+      </div>
+    </div>
+  </section>
+
+  <!-- AGENT INSTRUCTIONS -->
+  <section>
+    <h2>Instructions for Building Agents</h2>
+    <div class="agent-box">
+      <h3>How to build this project</h3>
       <ol>
         <li>Read this entire document before writing any code.</li>
-        <li>Complete Phase 0 (GitLab + SSH setup) before writing any application code.</li>
-        <li>Create the monorepo structure exactly as shown in the File Structure section.</li>
-        <li>Build Phase 1 first — get the DB schema and Fastify server booting before touching auth or routes.</li>
-        <li>Follow phases in order. Each phase's tasks are numbered globally — use them as checkboxes.</li>
-        <li>Use <strong>TypeScript strict mode</strong> throughout. No <code>any</code> types.</li>
-        <li>Package manager is <strong>npm</strong>. Use npm workspaces. Do not use pnpm or yarn.</li>
-        <li>API backend uses <strong>Vite (vite-node)</strong> for dev and build. Frontend uses <strong>Vite + React 18</strong> with React Router v6 and Tailwind CSS.</li>
-        <li>Use <strong>better-sqlite3</strong> (synchronous) for the DB — not an async ORM.</li>
-        <li>All HTML files are stored on disk, not in the DB. The DB only stores metadata and the file path.</li>
-        <li><strong>There is no <code>/auth/register</code> endpoint.</strong> The admin user is seeded from ADMIN_EMAIL + ADMIN_PASSWORD_HASH env vars during migration on first boot.</li>
-        <li>API key middleware must hash the incoming Bearer token with SHA-256 and compare to the stored hash — never compare raw strings.</li>
-        <li>The <code>/p/:slug</code> public route must work with no auth — the slug IS the access token for reading a plan.</li>
-        <li>Agents read plans via the public <code>/p/:slug</code> URL. Agents write/create plans via <code>/api/plans</code> with a Bearer API key.</li>
-        <li>Exactly two API keys exist: one for Claude (<code>claude</code>), one for Codex (<code>codex</code>). Do not create additional keys unless instructed.</li>
-        <li>JWT tokens are stored in <strong>localStorage</strong> on the frontend. The fetch wrapper in <code>lib/api.ts</code> attaches them automatically.</li>
-        <li>To deploy a new version, run <code>bash scripts/update.sh</code> from <code>/opt/planmanager</code> on the VPS. This does git pull + docker compose rebuild.</li>
-        <li>Log level is controlled by <code>LOG_LEVEL</code> env var. Fastify uses pino — all logs go to stdout, captured by Docker.</li>
-        <li>After completing each phase, run the server locally and verify the routes work before moving on.</li>
-        <li>When done with all phases, provide a <code>curl</code> cheatsheet for common agent operations.</li>
+        <li>Complete Phase 0 Vercel setup before writing application code — you need the env vars from Vercel Postgres and Blob before the code will work.</li>
+        <li>Build phases in order: scaffold → DB layer → MCP server → viewer → deploy.</li>
+        <li>TypeScript strict mode throughout. No <code>any</code> types.</li>
+        <li>Use <code>@vercel/postgres</code> for DB access and <code>@vercel/blob</code> for file storage — do not use raw <code>pg</code> or <code>node-fetch</code>.</li>
+        <li>Auth is two env var comparisons using <code>crypto.timingSafeEqual</code> — nothing more complex is needed.</li>
+        <li>HTML files are stored in Vercel Blob with <code>access: 'public'</code>. The public URL returned by Blob is stored in <code>blob_url</code> in Postgres.</li>
+        <li>The <code>/p/:slug</code> route is the only public HTTP endpoint. Everything else requires a valid MCP token.</li>
+        <li>There is no web dashboard. Plan management happens through MCP tool calls.</li>
+        <li>After Phase 3, test the MCP server locally before deploying: <code>vercel dev</code> with a local <code>.env.local</code>.</li>
+        <li>Future deploys: <code>git push origin main</code> — Vercel auto-builds and deploys from GitLab.</li>
       </ol>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ QUICK REFERENCE ═══════════════════════════════════════ -->
-  <section>
-    <h2>Agent curl Cheatsheet (once deployed)</h2>
-    <div class="file-tree">
-      <span class="tree-comment"># Upload a new plan</span><br>
-      curl -X POST https://plans.turtlez.au/api/plans \<br>
-      &nbsp;&nbsp;-H "Authorization: Bearer &lt;API_KEY&gt;" \<br>
-      &nbsp;&nbsp;-H "Content-Type: application/json" \<br>
-      &nbsp;&nbsp;-d '{"title":"My App Plan","description":"...","tags":"react,auth","html":"&lt;html&gt;...&lt;/html&gt;"}'<br>
-      <br>
-      <span class="tree-comment"># List all plans</span><br>
-      curl https://plans.turtlez.au/api/plans \<br>
-      &nbsp;&nbsp;-H "Authorization: Bearer &lt;API_KEY&gt;"<br>
-      <br>
-      <span class="tree-comment"># Fetch a specific plan (metadata + HTML)</span><br>
-      curl https://plans.turtlez.au/api/plans/abc12345 \<br>
-      &nbsp;&nbsp;-H "Authorization: Bearer &lt;API_KEY&gt;"<br>
-      <br>
-      <span class="tree-comment"># Update a plan mid-project</span><br>
-      curl -X PUT https://plans.turtlez.au/api/plans/abc12345 \<br>
-      &nbsp;&nbsp;-H "Authorization: Bearer &lt;API_KEY&gt;" \<br>
-      &nbsp;&nbsp;-H "Content-Type: application/json" \<br>
-      &nbsp;&nbsp;-d '{"html":"&lt;html&gt;...updated...&lt;/html&gt;"}'<br>
-      <br>
-      <span class="tree-comment"># View plan in browser (no auth needed)</span><br>
-      open https://plans.turtlez.au/p/abc12345
-    </div>
-  </section>
-
   <footer>
-    PlanManager build plan · Generated 2026-06-13 · plans.turtlez.au
+    PlanManager build plan · Revised 2026-06-15 · plans.turtlez.au · MCP architecture
   </footer>
 
 </div>
