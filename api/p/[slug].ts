@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { getPlanBySlug } from "../../lib/db.js";
+import { downloadPlanHtml } from "../../lib/blob.js";
 import { sanitize, SECURITY_HEADERS } from "../../lib/content.js";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -20,13 +21,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  const blobRes = await fetch(plan.blob_url);
-  if (!blobRes.ok) {
-    res.status(502).end("Could not fetch plan content");
-    return;
-  }
-
-  const raw = await blobRes.text();
+  const raw = await downloadPlanHtml(plan.blob_url);
   const safe = sanitize(raw);
 
   for (const [k, v] of Object.entries(SECURITY_HEADERS)) {
