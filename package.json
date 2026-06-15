@@ -1,0 +1,22 @@
+{
+  "name": "planmanager",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "migrate": "tsx scripts/migrate.ts",
+    "gen-tokens": "tsx scripts/gen-tokens.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "@neondatabase/serverless": "^1.1.0",
+    "@vercel/blob": "^2.4.0",
+    "sanitize-html": "^2.15.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "@types/sanitize-html": "^2.13.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}
