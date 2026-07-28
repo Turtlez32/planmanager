@@ -11,8 +11,7 @@ test.describe("plan_update authorization", () => {
     }
   });
 
-  // The ownership check removal (lib/plans.ts) isn't deployed to production yet — unskip once it's live.
-  test.skip("codex can update a plan claude owns (cross-review workflow)", async () => {
+  test("codex can update a plan claude owns (cross-review workflow)", async () => {
     const created = await createPlan("Cross-review test (claude-owned)", "<p>v1</p>", "claude");
     createdSlugs.push(created.slug);
 
@@ -32,7 +31,7 @@ test.describe("plan_update authorization", () => {
     expect(meta.revision).toBe(created.revision + 1);
   });
 
-  test.skip("claude can update a plan codex owns (cross-review workflow)", async () => {
+  test("claude can update a plan codex owns (cross-review workflow)", async () => {
     const created = await createPlan("Cross-review test (codex-owned)", "<p>v1</p>", "codex");
     createdSlugs.push(created.slug);
 
