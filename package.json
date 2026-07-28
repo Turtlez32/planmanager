@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "migrate": "tsx scripts/migrate.ts",
-    "gen-tokens": "tsx scripts/gen-tokens.ts"
+    "gen-tokens": "tsx scripts/gen-tokens.ts",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.1",
@@ -14,6 +17,7 @@
     "sanitize-html": "^2.15.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.55.0",
     "@types/node": "^22.15.0",
     "@types/sanitize-html": "^2.13.0",
     "@vercel/node": "^5.8.17",
