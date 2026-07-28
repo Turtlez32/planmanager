@@ -27,10 +27,6 @@ export async function updatePlan(
   const plan = await db.getPlanBySlug(slug);
   if (!plan) throw new NotFoundError(`Plan not found: ${slug}`);
 
-  if (!auth.isAdmin && plan.owner_principal !== auth.principal) {
-    throw new ForbiddenError("You do not own this plan");
-  }
-
   if (expectedRevision !== undefined && plan.revision !== expectedRevision) {
     throw new ConflictError(
       `Revision conflict: expected ${expectedRevision}, got ${plan.revision}`,

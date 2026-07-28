@@ -5,6 +5,7 @@ export async function uploadPlanHtml(slug: string, html: string): Promise<string
     access: "private",
     contentType: "text/html; charset=utf-8",
     addRandomSuffix: false,
+    allowOverwrite: true,
   });
   return url;
 }

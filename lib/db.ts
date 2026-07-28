@@ -21,26 +21,26 @@ export interface PlanRow {
 
 export async function getPlanBySlug(slug: string): Promise<PlanRow | null> {
   const sql = getDb();
-  const rows = await sql<PlanRow[]>`
+  const rows = (await sql`
     SELECT * FROM plans WHERE slug = ${slug} AND deleted_at IS NULL LIMIT 1
-  `;
+  `) as PlanRow[];
   return rows[0] ?? null;
 }
 
 export async function getPlanById(id: number): Promise<PlanRow | null> {
   const sql = getDb();
-  const rows = await sql<PlanRow[]>`
+  const rows = (await sql`
     SELECT * FROM plans WHERE id = ${id} AND deleted_at IS NULL LIMIT 1
-  `;
+  `) as PlanRow[];
   return rows[0] ?? null;
 }
 
 export async function listPlans(includeDeleted = false): Promise<PlanRow[]> {
   const sql = getDb();
   if (includeDeleted) {
-    return sql<PlanRow[]>`SELECT * FROM plans ORDER BY updated_at DESC`;
+    return (await sql`SELECT * FROM plans ORDER BY updated_at DESC`) as PlanRow[];
   }
-  return sql<PlanRow[]>`SELECT * FROM plans WHERE deleted_at IS NULL ORDER BY updated_at DESC`;
+  return (await sql`SELECT * FROM plans WHERE deleted_at IS NULL ORDER BY updated_at DESC`) as PlanRow[];
 }
 
 export async function createPlan(
@@ -50,11 +50,11 @@ export async function createPlan(
   ownerPrincipal: string,
 ): Promise<PlanRow> {
   const sql = getDb();
-  const rows = await sql<PlanRow[]>`
+  const rows = (await sql`
     INSERT INTO plans (slug, title, blob_url, owner_principal, updated_by)
     VALUES (${slug}, ${title}, ${blobUrl}, ${ownerPrincipal}, ${ownerPrincipal})
     RETURNING *
-  `;
+  `) as PlanRow[];
   return rows[0]!;
 }
 
@@ -65,13 +65,13 @@ export async function updatePlan(
   updatedBy: string,
 ): Promise<PlanRow> {
   const sql = getDb();
-  const rows = await sql<PlanRow[]>`
+  const rows = (await sql`
     UPDATE plans
     SET title = ${title}, blob_url = ${blobUrl}, updated_by = ${updatedBy},
         revision = revision + 1, updated_at = NOW()
     WHERE id = ${id}
     RETURNING *
-  `;
+  `) as PlanRow[];
   return rows[0]!;
 }
 
