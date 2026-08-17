@@ -2,19 +2,44 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import type { AuthContext } from "./auth.js";
 import * as plans from "./plans.js";
+import {
+  PLAN_TEMPLATE_FILENAME,
+  PLAN_TEMPLATE_INSTRUCTIONS,
+  PLAN_TEMPLATE_VERSION,
+  readPlanTemplate,
+} from "./plan-template.js";
 
 export function buildMcpServer(auth: AuthContext): McpServer {
   const server = new McpServer({
     name: "planmanager",
-    version: "1.0.0",
+    version: "1.1.0",
   });
 
   server.tool(
+    "template_read",
+    "Read the canonical PlanManager HTML layout. Call this before plan_create or plan_update, use it as the starting document, and adapt its example modules to the plan while preserving the shared visual system.",
+    {},
+    async () => ({
+      content: [
+        {
+          type: "text",
+          text: JSON.stringify({
+            filename: PLAN_TEMPLATE_FILENAME,
+            version: PLAN_TEMPLATE_VERSION,
+            instructions: PLAN_TEMPLATE_INSTRUCTIONS,
+            html: readPlanTemplate(),
+          }),
+        },
+      ],
+    }),
+  );
+
+  server.tool(
     "plan_create",
-    "Create a new plan and return its public slug URL.",
+    "Create a new plan and return its public slug URL. REQUIRED WORKFLOW: call template_read first, begin with its HTML, replace the example content, and preserve the shared layout system unless the plan genuinely needs a module adapted.",
     {
       title: z.string().min(1).max(200).describe("Plan title"),
-      html: z.string().min(1).describe("Full HTML content of the plan"),
+      html: z.string().min(1).describe("Complete plan HTML derived from the latest template_read result"),
     },
     async ({ title, html }) => {
       const plan = await plans.createPlan(auth, title, html);
@@ -36,11 +61,11 @@ export function buildMcpServer(auth: AuthContext): McpServer {
 
   server.tool(
     "plan_update",
-    "Update an existing plan you own.",
+    "Update an existing plan you own. For layout changes or substantial rewrites, call template_read first and keep the plan aligned with its shared visual system.",
     {
       slug: z.string().length(8).describe("Plan slug"),
       title: z.string().min(1).max(200).describe("Plan title"),
-      html: z.string().min(1).describe("Full HTML content of the plan"),
+      html: z.string().min(1).describe("Complete updated plan HTML aligned with the latest template_read result"),
       revision: z.number().int().optional().describe("Expected current revision for conflict detection"),
     },
     async ({ slug, title, html, revision }) => {

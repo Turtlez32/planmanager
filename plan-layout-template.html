@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Reusable PlanManager HTML layout template">
+  <title>Plan System — Reusable Layout Template</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap');
+
+    :root {
+      --ink: #17221e;
+      --muted: #66736d;
+      --quiet: #8b9691;
+      --paper: #f5f3ec;
+      --surface: #fffefa;
+      --line: #dfe3de;
+      --forest: #13251f;
+      --forest-2: #1e3b32;
+      --mint: #82dfbd;
+      --mint-soft: #e4f5ee;
+      --coral: #ff9278;
+      --gold: #e4bf65;
+      --violet: #a78bfa;
+      --radius: 16px;
+      --shadow: 0 12px 36px rgba(20, 42, 34, .06);
+      --content: 1080px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font: 16px/1.65 "DM Sans", sans-serif; }
+    a { color: inherit; }
+    code { padding: .12rem .35rem; border-radius: 5px; background: #eef0ec; font: .86em "DM Mono", monospace; }
+
+    .cover {
+      min-height: 86vh; display: grid; place-items: center; overflow: hidden;
+      padding: 72px 24px; color: #f8f5ed; text-align: center; position: relative;
+      background: radial-gradient(circle at 15% 18%, #30594a 0, transparent 32%),
+        radial-gradient(circle at 85% 78%, #47362d 0, transparent 30%),
+        linear-gradient(145deg, #0f1b17, #183229);
+    }
+    .cover::after { content: ""; position: absolute; inset: 0; opacity: .2; background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 48px 48px; mask-image: linear-gradient(to bottom, black, transparent); }
+    .cover-inner { max-width: 900px; position: relative; z-index: 1; }
+    .identity { display: inline-flex; align-items: center; gap: 11px; margin-bottom: 48px; font-weight: 700; }
+    .identity-mark { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 11px 11px 11px 4px; color: var(--forest); background: var(--coral); font: italic 24px "DM Serif Display", serif; }
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 25px; }
+    .pill, .eyebrow, .label { font: 500 .68rem "DM Mono", monospace; letter-spacing: .14em; text-transform: uppercase; }
+    .pill { padding: 6px 11px; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; color: #b8c8c1; }
+    .signal { display: flex; justify-content: center; gap: 9px; margin: 25px; }
+    .signal i { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); }
+    .signal i:nth-child(2) { background: var(--coral); }
+    .signal i:nth-child(3) { background: var(--gold); }
+    h1 { margin: 0; font: 500 clamp(3.4rem, 9vw, 6.7rem)/.92 "DM Serif Display", serif; letter-spacing: -.055em; }
+    h1 em { color: var(--mint); }
+    .cover-lede { max-width: 680px; margin: 27px auto 28px; color: #b8c6c0; font-size: 1.08rem; }
+    .cover-meta { color: #87a097; }
+
+    .toc { position: sticky; top: 0; z-index: 10; padding: 13px 20px; overflow-x: auto; white-space: nowrap; text-align: center; background: rgba(15,27,23,.96); border-bottom: 1px solid rgba(255,255,255,.1); backdrop-filter: blur(12px); }
+    .toc a { display: inline-block; margin: 4px 15px; color: #aabcb5; text-decoration: none; font: 500 .67rem "DM Mono", monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .toc a:hover, .toc a:focus-visible { color: var(--mint); }
+
+    .wrap { max-width: var(--content); margin: auto; padding: 78px 28px; }
+    .section { padding: 72px 0; border-top: 1px solid var(--line); }
+    .section:first-child { padding-top: 0; border-top: 0; }
+    .eyebrow { color: #397661; }
+    h2 { max-width: 760px; margin: 8px 0 17px; font: 500 clamp(2.15rem, 5vw, 3rem)/1.05 "DM Serif Display", serif; letter-spacing: -.035em; }
+    h3 { margin: 0; font-size: 1rem; }
+    .lead { max-width: 760px; margin: 0 0 32px; color: var(--muted); font-size: 1.08rem; }
+
+    .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .metric, .card, .spec, .component { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .metric { padding: 22px; }
+    .metric strong { display: block; color: var(--forest-2); font: 500 1.8rem "DM Serif Display", serif; }
+    .metric span { color: var(--quiet); }
+
+    .flow-panel { margin-top: 24px; padding: 28px; border-radius: var(--radius); color: #f5f1e8; background: var(--forest); }
+    .flow-panel h3 { margin-bottom: 19px; font: 500 1.4rem "DM Serif Display", serif; }
+    .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+    .flow div { padding: 14px 10px; border: 1px solid rgba(255,255,255,.13); border-radius: 10px; background: rgba(255,255,255,.04); text-align: center; font-size: .75rem; }
+    .flow b { display: block; margin-bottom: 4px; color: var(--mint); font: 500 .65rem "DM Mono", monospace; }
+
+    .phase-head { display: grid; grid-template-columns: 110px 1fr; gap: 24px; }
+    .phase-number { color: #b9d5ca; font: 500 4.6rem/.82 "DM Serif Display", serif; }
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; margin: 28px 0; }
+    .card { position: relative; padding: 22px 23px 22px 52px; }
+    .card .check { position: absolute; top: 22px; left: 20px; display: grid; width: 21px; height: 21px; place-items: center; border-radius: 7px; color: #24735b; background: #dff6ed; font-size: .72rem; font-weight: 800; }
+    .card p, .spec p, .component p { margin: 5px 0 0; color: var(--muted); font-size: .86rem; }
+    .callout { display: flex; gap: 15px; padding: 20px 22px; border-radius: 12px; color: #28473d; background: var(--mint-soft); }
+    .callout.warn { background: #fff1df; color: #674822; }
+    .callout-icon { font-size: 1.4rem; }
+    .callout p { margin: 2px 0 0; font-size: .86rem; }
+
+    .spec-shell { overflow: hidden; border-radius: 20px; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow); }
+    .spec-head { display: flex; align-items: center; gap: 14px; padding: 22px 25px; color: white; background: linear-gradient(135deg, #6549bd, #8a70db); }
+    .spec-icon { display: grid; width: 44px; height: 44px; place-items: center; border-radius: 13px; background: rgba(255,255,255,.16); font-size: 1.2rem; }
+    .spec-head p { margin: 2px 0 0; color: rgba(255,255,255,.72); font-size: .83rem; }
+    .status { margin-left: auto; padding: 5px 10px; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; font: 500 .65rem "DM Mono", monospace; }
+    .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; padding: 22px; }
+    .spec { padding: 18px; background: #f8f8f5; box-shadow: none; }
+    .spec ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); font-size: .86rem; }
+    .success { margin: 0 22px 22px; padding: 18px 20px; border-radius: 12px; background: #eee9ff; color: #493c77; }
+    .success ul { margin: 7px 0 0; padding-left: 18px; font-size: .86rem; }
+
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: white; }
+    table { width: 100%; border-collapse: collapse; min-width: 680px; }
+    th, td { padding: 14px 17px; border-bottom: 1px solid #e8eae6; text-align: left; font-size: .82rem; vertical-align: top; }
+    th { color: #586a62; background: #edf3f0; font: 500 .65rem "DM Mono", monospace; letter-spacing: .1em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    .tag { display: inline-block; padding: 3px 8px; border-radius: 999px; color: #277159; background: #dff6ed; font: 500 .65rem "DM Mono", monospace; }
+    .tag.amber { color: #765317; background: #fff0ca; }
+
+    .component-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .component { padding: 22px; }
+    .component .label { display: block; margin-bottom: 15px; color: var(--quiet); }
+    .component ul { margin: 9px 0 0; padding-left: 18px; color: var(--muted); font-size: .84rem; }
+    .swatches { display: flex; gap: 9px; margin-top: 18px; }
+    .swatch { width: 38px; height: 38px; border-radius: 10px; border: 1px solid rgba(0,0,0,.06); }
+
+    .principle { margin-top: 30px; padding: 38px; border-radius: 18px; color: #f5f1e8; text-align: center; background: linear-gradient(135deg, #245346, #183a32); }
+    .principle .label { color: var(--mint); }
+    blockquote { max-width: 760px; margin: 15px auto 0; font: italic 500 1.7rem/1.35 "DM Serif Display", serif; }
+    .footer { padding: 42px 24px; color: #82968e; text-align: center; background: #101d19; font: 500 .65rem "DM Mono", monospace; letter-spacing: .12em; text-transform: uppercase; }
+
+    @media (max-width: 800px) {
+      .metric-grid, .component-grid, .flow { grid-template-columns: 1fr 1fr; }
+      .cards, .spec-grid { grid-template-columns: 1fr; }
+      .phase-head { grid-template-columns: 1fr; }
+      .phase-number { font-size: 3rem; }
+      .toc { position: static; text-align: left; }
+    }
+    @media (max-width: 520px) {
+      .metric-grid, .component-grid, .flow { grid-template-columns: 1fr; }
+      .wrap { padding: 56px 18px; }
+      .cover { min-height: 78vh; }
+      .spec-head { align-items: flex-start; }
+      .status { display: none; }
+    }
+    @media print { .toc { display: none; } .cover { min-height: 55vh; } .section { break-inside: avoid; } }
+  </style>
+</head>
+<body>
+  <!-- TEMPLATE CONTRACT: keep the major section order and reuse these class names; replace example copy. -->
+  <header class="cover">
+    <div class="cover-inner">
+      <div class="identity"><span class="identity-mark">p</span> plan system</div>
+      <div class="pills"><span class="pill">Implementation plan</span><span class="pill">v1.0</span><span class="pill">August 2026</span></div>
+      <div class="signal"><i></i><i></i><i></i></div>
+      <h1>Project <em>Northstar</em></h1>
+      <p class="cover-lede">A single example plan showing product requirements, technical architecture, delivery phases, data tables, decisions, acceptance criteria and visual direction.</p>
+      <p class="cover-meta label">Owner: Product &amp; Engineering · Status: Ready for review</p>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Plan sections">
+    <a href="#overview">Overview</a><a href="#architecture">Architecture</a><a href="#delivery">Delivery</a><a href="#feature">Feature spec</a><a href="#matrix">Matrix</a><a href="#style">Style</a>
+  </nav>
+
+  <main class="wrap">
+    <section class="section" id="overview">
+      <span class="eyebrow">01 · Executive overview</span>
+      <h2>Start with the outcome and the boundaries</h2>
+      <p class="lead">Northstar is a calm planning workspace that turns structured project briefs into consistent, reviewable pages. The first release prioritises legibility, predictable sections and portable HTML.</p>
+      <div class="metric-grid">
+        <article class="metric"><strong>6</strong><span class="label">Core sections</span></article>
+        <article class="metric"><strong>3</strong><span class="label">User roles</span></article>
+        <article class="metric"><strong>4</strong><span class="label">Delivery phases</span></article>
+        <article class="metric"><strong>AA</strong><span class="label">Accessibility target</span></article>
+      </div>
+    </section>
+
+    <section class="section" id="architecture">
+      <span class="eyebrow">02 · System flow</span>
+      <h2>Show how the pieces connect</h2>
+      <p class="lead">Use a short architecture strip for the main path. Keep deeper implementation choices in the decision callout below it.</p>
+      <div class="flow-panel">
+        <h3>Proposed application flow</h3>
+        <div class="flow"><div><b>01</b>Plan brief</div><div><b>02</b>MCP fetch</div><div><b>03</b>Template render</div><div><b>04</b>Review</div><div><b>05</b>Publish</div></div>
+      </div>
+      <div style="height:14px"></div>
+      <aside class="callout"><span class="callout-icon">◆</span><div><strong>Architecture decision</strong><p>Ship a self-contained HTML document with semantic sections and shared design tokens. This keeps plans portable while preserving a stable visual contract.</p></div></aside>
+    </section>
+
+    <section class="section" id="delivery">
+      <div class="phase-head">
+        <div class="phase-number">03</div>
+        <div><span class="eyebrow">Delivery phase</span><h2>Build the reusable foundation</h2><p class="lead">Number phases clearly, explain the outcome, then list concrete deliverables that can be checked independently.</p></div>
+      </div>
+      <div class="cards">
+        <article class="card"><span class="check">✓</span><strong>Template contract</strong><p>Define stable section order, CSS classes and content guidance for agents.</p></article>
+        <article class="card"><span class="check">✓</span><strong>Responsive layout</strong><p>Support desktop, mobile and print without external JavaScript.</p></article>
+        <article class="card"><span class="check">✓</span><strong>Content mapping</strong><p>Map brief fields to overview, phases, specs, matrices and decisions.</p></article>
+        <article class="card"><span class="check">✓</span><strong>Validation</strong><p>Verify valid HTML, readable contrast and complete acceptance criteria.</p></article>
+      </div>
+      <aside class="callout warn"><span class="callout-icon">!</span><div><strong>Open question</strong><p>Should future plans allow custom accent colours, or should every plan use one fixed palette?</p></div></aside>
+    </section>
+
+    <section class="section" id="feature">
+      <span class="eyebrow">04 · Detailed feature specification</span>
+      <h2>Describe behaviour, interaction and success</h2>
+      <p class="lead">Use this module for a product feature, workflow, game mechanic or any output that needs more detail than a task card.</p>
+      <article class="spec-shell">
+        <header class="spec-head"><span class="spec-icon">✦</span><div><h3>Guided plan creation</h3><p>Structured inputs become a complete, consistent plan page</p></div><span class="status">Priority · High</span></header>
+        <div class="spec-grid">
+          <div class="spec"><h3>Inputs</h3><ul><li>Title, owner, version and status</li><li>Goals, non-goals and constraints</li><li>Milestones, dependencies and risks</li></ul></div>
+          <div class="spec"><h3>Interaction</h3><ul><li>Agent fetches the canonical template</li><li>Agent replaces examples with project content</li><li>Reviewer opens one self-contained HTML file</li></ul></div>
+          <div class="spec"><h3>Rules</h3><ul><li>Keep required section order</li><li>Omit optional modules only when irrelevant</li><li>Do not redefine base layout tokens per plan</li></ul></div>
+          <div class="spec"><h3>States &amp; feedback</h3><ul><li>Draft, ready for review and approved</li><li>Risks and open questions use amber callouts</li><li>Completed deliverables use clear check marks</li></ul></div>
+        </div>
+        <div class="success"><strong>Acceptance criteria</strong><ul><li>The page explains what is being built, why, how and in what order.</li><li>Every phase has testable deliverables and every detailed feature has a success condition.</li><li>The layout remains readable at 360px width and when printed.</li></ul></div>
+      </article>
+    </section>
+
+    <section class="section" id="matrix">
+      <span class="eyebrow">05 · Structured comparison</span>
+      <h2>Use tables for exact mappings</h2>
+      <p class="lead">Tables work best for scope matrices, screens, data models, dependencies, risks and release decisions.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Output</th><th>Purpose</th><th>Required content</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Executive overview</td><td>Orient the reader</td><td>Outcome, audience, boundaries and metrics</td><td><span class="tag">Required</span></td></tr>
+          <tr><td>Architecture flow</td><td>Show the main system path</td><td>Inputs, processing, storage and interface</td><td><span class="tag">Required</span></td></tr>
+          <tr><td>Detailed spec</td><td>Define complex behaviour</td><td>Inputs, interaction, rules, states and acceptance</td><td><span class="tag amber">As needed</span></td></tr>
+          <tr><td>Visual direction</td><td>Keep execution consistent</td><td>Tokens, typography, shape and motion guidance</td><td><span class="tag">Required</span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="section" id="style">
+      <span class="eyebrow">06 · Layout styling</span>
+      <h2>Keep the system calm, clear and recognisable</h2>
+      <p class="lead">These are the shared style rules future plans should inherit. Project identity belongs in the copy and accent content—not in a completely new layout.</p>
+      <div class="component-grid">
+        <article class="component"><span class="label">Typography</span><h3>Editorial hierarchy</h3><ul><li>Serif display headings</li><li>Sans-serif body copy</li><li>Monospace labels and metadata</li></ul></article>
+        <article class="component"><span class="label">Shape language</span><h3>Soft, structured surfaces</h3><ul><li>12–20px corner radii</li><li>Fine neutral borders</li><li>Low, diffuse shadows</li></ul></article>
+        <article class="component"><span class="label">Colour tokens</span><h3>One grounded palette</h3><div class="swatches" aria-label="Palette"><span class="swatch" style="background:#13251f"></span><span class="swatch" style="background:#82dfbd"></span><span class="swatch" style="background:#ff9278"></span><span class="swatch" style="background:#e4bf65"></span><span class="swatch" style="background:#a78bfa"></span></div></article>
+      </div>
+      <div class="principle"><span class="label">Design principle</span><blockquote>“A plan should feel like one coherent decision system—not a pile of unrelated notes.”</blockquote></div>
+    </section>
+  </main>
+
+  <footer class="footer">Reusable PlanManager layout · example content only · replace copy, preserve structure</footer>
+</body>
+</html>
