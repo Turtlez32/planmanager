@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "api/mcp.ts": {
+      "includeFiles": "plan-layout-template.html"
+    }
+  },
   "rewrites": [
     { "source": "/", "destination": "/api/index" },
     { "source": "/p/:slug", "destination": "/api/p/[slug]" }

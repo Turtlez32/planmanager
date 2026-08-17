@@ -78,6 +78,17 @@ export interface PlanMeta {
   updated_at: string;
 }
 
+export interface PlanTemplate {
+  filename: string;
+  version: string;
+  instructions: string[];
+  html: string;
+}
+
+export function readTemplate(as: Principal = "claude"): Promise<PlanTemplate> {
+  return callToolOrThrow<PlanTemplate>(as, "template_read", {});
+}
+
 export function createPlan(title: string, html: string, as: Principal = "claude"): Promise<CreatedPlan> {
   return callToolOrThrow<CreatedPlan>(as, "plan_create", { title, html });
 }
