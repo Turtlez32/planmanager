@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
     "migrate": "tsx scripts/migrate.ts",
     "gen-tokens": "tsx scripts/gen-tokens.ts",
     "test": "playwright test",
@@ -22,6 +25,7 @@
     "@types/sanitize-html": "^2.13.0",
     "@vercel/node": "^5.8.17",
     "tsx": "^4.19.4",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vite": "^8.2.1"
   }
 }
